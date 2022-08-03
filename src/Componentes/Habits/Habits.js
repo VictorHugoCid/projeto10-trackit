@@ -8,44 +8,66 @@ import styled from 'styled-components'
 
 
 export default function Habits() {
-    const weekdays = ['D', 'S', 'T', 'Q', 'Q', 'S', 'S']
+  const weekdays = ['D', 'S', 'T', 'Q', 'Q', 'S', 'S']
 
-    function selectDay() {
+  function selectDay() {
 
-    }
+  }
 
-    return (
-        <>
-            <NavBar />
-            <HabitsMain >
-                <HabitsTitle >
-                    <h1>Meus hábitos</h1>
-                    <div className='addButton'>
-                        <ion-icon name="add"></ion-icon>
-                    </div>
+  const numHabits = 1
 
-                </HabitsTitle>
-                <BoxHabits >
-                    <AddHabits >
-                        <input className='habitsInputAdd' type='text' placeholder='nome do hábito'></input>
+  return (
+    <>
+      <NavBar />
+      <HabitsMain >
+        <HabitsTitle >
+          <h1>Meus hábitos</h1>
+          <div className='addButton'>
+            <ion-icon name="add"></ion-icon>
+          </div>
 
-                        <BoxWeekdays >
-                            {weekdays.map((value, index) => <Day key={index} className='day' onClick={selectDay} >{value}</Day>)}
-                        </BoxWeekdays>
+        </HabitsTitle>
+        <BoxHabits >
+          <AddHabits >
+            <input className='habitsInputAdd' type='text' placeholder='nome do hábito'></input>
 
-                        <ButtonBoxAdd >
-                            <Cancel >Cancelar</Cancel>
-                            <Save >Salvar</Save>
-                        </ButtonBoxAdd>
-                    </AddHabits>
+            <BoxWeekdays >
+              {weekdays.map((value, index) => <Day key={index} className='day' onClick={selectDay} >{value}</Day>)}
+            </BoxWeekdays>
+
+            <ButtonBoxAdd >
+              <Cancel >Cancelar</Cancel>
+              <Save >Salvar</Save>
+            </ButtonBoxAdd>
+          </AddHabits>
 
 
-                    <h1>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</h1>
-                </BoxHabits>
-            </HabitsMain>
-            <Footer />
-        </>
-    )
+          {(numHabits) ? (
+            <Habit>
+              <DivAlt>
+                <p>ver narutinho</p>
+                <ion-icon name="trash-outline"></ion-icon>
+              </DivAlt>
+
+              <BoxWeekdays >
+                {weekdays.map((value, index) => <Day key={index} className='day'>{value}</Day>)}
+              </BoxWeekdays>
+            </Habit>
+          ) : (
+            <h1>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</h1>
+          )}
+
+
+
+
+
+
+        </BoxHabits>
+      </HabitsMain>
+
+      <Footer />
+    </>
+  )
 }
 
 const HabitsMain = styled.div`
@@ -123,6 +145,7 @@ const Day = styled.li`
   width: 30px;
   height: 30px;
   background: #ffffff;
+  /* background-color: #CFCFCF; */
   border: 1px solid #d5d5d5;
   border-radius: 5px;
   margin-right: 8px;
@@ -134,6 +157,7 @@ const Day = styled.li`
 
   font-size: 20px;
   color: #d5d5d5;
+  /* color: #FFFFFF; */
 
   cursor: pointer;
 `
@@ -167,4 +191,25 @@ const Save = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+`
+
+/* SINGLE_HABIT */
+
+const Habit = styled.div`
+  width: 100%;
+  height: 90px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+
+  padding: 15px;
+  background-color: #ffffff;
+
+  font-size: 20px;
+  color: #666666;
+`
+
+const DivAlt = styled.div`
+  display: flex;
+  justify-content: space-between;
+    
 `

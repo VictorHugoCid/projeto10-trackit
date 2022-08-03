@@ -7,6 +7,8 @@ import LogIn from './LogIn/LogIn'
 import SingUp from './SingUp/SingUp.js'
 import Habits from './Habits/Habits.js'
 import NavBar from './NavBar/NavBar'
+import Today from './Today/Today'
+import HistoricPage from './HistoricPage/HistoricPage'
 
 
 export default function App() {
@@ -21,10 +23,10 @@ export default function App() {
                     <Route path="/cadastro" element={<SingUp />} />  */}
 
 
-                    <Route path="/" element={<Habits />} />
+                    {/* <Route path="/habito" element={<Habits />} /> */}
 
-                    {/*<Route path="/hoje" element={<Today />} />
-                    <Route path="/historic" element={<Historic />} /> */}
+                    {/* <Route path="/hoje" element={<Today />} /> */}
+                    <Route path="/" element={<HistoricPage />} />
                 </Routes>
             </BrowserRouter>
 
