@@ -6,7 +6,7 @@ import GlobalStyle from '../Styles/globalStyle';
 import LogIn from './LogIn/LogIn'
 import SingUp from './SingUp/SingUp.js'
 import Habits from './Habits/Habits.js'
-import NavBar from './NavBar/NavBar.js'
+import NavBar from './NavBar/NavBar'
 
 
 export default function App() {
@@ -14,12 +14,13 @@ export default function App() {
     return (
         <>
             <GlobalStyle />
-            {/* <Navbar />  TERÁ Q SER CHAMADA NOS COMPONENTES */}
+            {/* <NavBar /> */}
             <BrowserRouter>
                 <Routes>
                     {/* <Route path="/" element={<LogIn />} />
                     <Route path="/cadastro" element={<SingUp />} />  */}
-                    {/* <Route path="/" element={<NavBar />} /> */}
+
+
                     <Route path="/" element={<Habits />} />
 
                     {/*<Route path="/hoje" element={<Today />} />

@@ -53,11 +53,10 @@ a {
 	text-decoration:none
   }
 
-/* button{
+button{
 	all:unset;
-} */
+}
   
-
 * {
     box-sizing: border-box;
 } 
