@@ -16,17 +16,16 @@ export default function App() {
     return (
         <>
             <GlobalStyle />
-            {/* <NavBar /> */}
             <BrowserRouter>
                 <Routes>
-                    {/* <Route path="/" element={<LogIn />} />
-                    <Route path="/cadastro" element={<SingUp />} />  */}
+                    <Route path="/" element={<LogIn />} />
+                    <Route path="/cadastro" element={<SingUp />} /> 
 
 
                     {/* <Route path="/habito" element={<Habits />} /> */}
 
                     {/* <Route path="/hoje" element={<Today />} /> */}
-                    <Route path="/" element={<HistoricPage />} />
+                    {/* <Route path="/" element={<HistoricPage />} /> */}
                 </Routes>
             </BrowserRouter>
 

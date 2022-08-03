@@ -6,6 +6,8 @@ import logo from './logo.png'
 export default function LogIn() {
 
 
+
+
     return (
         <LoginBox className='loginBox'>
             <img src={logo} alt='Track-it' />
@@ -37,8 +39,8 @@ const LoginBox = styled.div`
     text-decoration: underline;
     }
     img{
-        width: 48vw;
-        height: 46vw;
+        width: 300px;
+        height: auto;
         margin-bottom: 50px;
     }
 
@@ -46,8 +48,8 @@ const LoginBox = styled.div`
 
 const InputLogin = styled.input`
 
-    width: 80vw;
-    height: 45px;
+    min-width: 80vw;
+    min-height: 45px;
 
     margin-bottom: 10px;
     background: #ffffff;
@@ -61,8 +63,8 @@ const InputLogin = styled.input`
 
 const LoginButton = styled.div`
 
-    width: 80vw;
-    height: 45px;
+    min-width: 80vw;
+    min-height: 45px;
     margin-bottom: 10px;
 
     display: flex;

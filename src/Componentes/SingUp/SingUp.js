@@ -1,20 +1,84 @@
-import { Link } from 'react-router-dom'
+import axios from 'axios'
+import { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 
 import logo from './logo.png'
 
 export default function SingUp() {
 
+    const navigate = useNavigate()
+    const [form, setForm] = useState({
+        email:'',
+        name:'',
+        image:'',
+        password:'',
+    });
 
+    function handleForm(event){
+        console.log(event.target.name, event.target.value);
+        setForm({
+            ...form,
+            [event.target.name]: event.target.value,
+
+        });
+    }
+
+    function sendForm(){
+        console.log(form);
+
+/*         const body ={
+            email:form.email,
+            name:form.name,
+            image:form.image,
+            password:form.password,
+        } *//*  OU SE UMA FORMA MAIS ELEGANTE: */
+
+        const body ={
+            ...form,
+        }
+
+        
+        const promise = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up',body);
+
+        promise.then(res => {
+            navigate('/');
+        })
+        
+    }
 
     return (
         <SingUpBox>
             <img src={logo} alt='Track-it'></img>
-            <InputSingUp type='email' placeholder='email'></InputSingUp>
-            <InputSingUp type='password' placeholder='senha'></InputSingUp>
-            <InputSingUp type='text' placeholder='nome'></InputSingUp>
-            <InputSingUp type='source' placeholder='foto'></InputSingUp>
-            <SingUpButton >Cadastrar</SingUpButton>
+            <InputSingUp 
+                type='email' 
+                placeholder='E-mail'
+                name='email'
+                onChange={handleForm}
+                value={form.email}
+            />
+            <InputSingUp 
+                type='password' 
+                placeholder='senha'
+                name='password'
+                onChange={handleForm}
+                value={form.password}
+            />
+            <InputSingUp 
+                type='text' 
+                placeholder='nome'
+                name='name'
+                onChange={handleForm}
+                value={form.name}
+            />
+            <InputSingUp 
+                type='source' 
+                placeholder='foto'
+                name='image'
+                onChange={handleForm}
+                value={form.image}
+            />
+            <SingUpButton onClick={sendForm}>Cadastrar</SingUpButton>
             <Link to={`/`}>
                 <p>Já tem uma conta? Faça login!</p>
             </Link>
@@ -39,8 +103,8 @@ const SingUpBox = styled.div`
     }
 
     img{
-        width: 48vw;
-        height: 46vw;
+        width: 300px;
+        height: auto;
         margin-bottom: 50px;
     }
 `
