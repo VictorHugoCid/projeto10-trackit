@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-component'
+import { createGlobalStyle } from 'styled-components'
 
 
 const GlobalStyle = createGlobalStyle`
@@ -49,15 +49,19 @@ strong {
 	font-weight: bold;
 }
 a {
+	color: inherit;
 	text-decoration:none
   }
+
+/* button{
+	all:unset;
+} */
   
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
-/* font-family: 'Roboto', sans-serif; */
 
 * {
     box-sizing: border-box;
 } 
 
 `
+
 export default GlobalStyle

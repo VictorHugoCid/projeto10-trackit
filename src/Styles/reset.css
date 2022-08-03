@@ -49,9 +49,11 @@ a {
   }
   
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
-/* font-family: 'Roboto', sans-serif; */
+
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100&display=swap');
 
 * {
     box-sizing: border-box;
+	font-family: 'Lexend', sans-serif;
 	
 } 
