@@ -22,7 +22,7 @@ export default function App() {
                     <Route path="/cadastro" element={<SingUp />} /> 
 
 
-                    {/* <Route path="/habito" element={<Habits />} /> */}
+                     <Route path="/habitos" element={<Habits />} />
 
                     {/* <Route path="/hoje" element={<Today />} /> */}
                     {/* <Route path="/" element={<HistoricPage />} /> */}

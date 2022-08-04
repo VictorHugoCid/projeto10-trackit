@@ -2,6 +2,7 @@
 import Footer from "../Footer/Footer"
 import NavBar from "../NavBar/NavBar"
 import styled from 'styled-components'
+import { useState } from "react"
 
 /*     TEM Q IMPORTAR ISSO AQUI
 @import url("https://fonts.googleapis.com/css2?family=Lexend:wght@100&display=swap"); */
@@ -10,65 +11,100 @@ import styled from 'styled-components'
 export default function Habits() {
   const weekdays = ['D', 'S', 'T', 'Q', 'Q', 'S', 'S']
 
+  const [colors, setColors] = useState({})
+
+  const busy = { color: '#FFFFFF', backgroundColor: '#CFCFCF' }
+  const free = { color: '#d5d5d5', backgroundColor: '#red' }
+
+  const [selectedDay, setSelectedDay] = useState(false)
+  const [add, setAdd] = useState(false) /* abrir e fechar a box de adição */
+
   function selectDay() {
+    console.log(selectedDay)
+
+    if (selectedDay === false) {
+      setColors({ ...busy })
+    } else {
+      setColors({ ...free })
+    }
 
   }
 
-  const numHabits = 1
+  const numHabits = 0 /* LEMBRAR DE TIRAR ISSO AQUI */
 
   return (
+
+
     <>
-      <NavBar />
-      <HabitsMain >
-        <HabitsTitle >
-          <h1>Meus hábitos</h1>
-          <div className='addButton'>
-            <ion-icon name="add"></ion-icon>
-          </div>
+      {colors ? (
+        <>
+          <NavBar />
+          <HabitsMain >
+            <HabitsTitle >
+              <h1>Meus hábitos</h1>
+              <div onClick={() => setAdd(!add)}>
+                <ion-icon name="add"></ion-icon>
+              </div>
 
-        </HabitsTitle>
-        <BoxHabits >
-          <AddHabits >
-            <input className='habitsInputAdd' type='text' placeholder='nome do hábito'></input>
+            </HabitsTitle>
+            <BoxHabits >
 
-            <BoxWeekdays >
-              {weekdays.map((value, index) => <Day key={index} className='day' onClick={selectDay} >{value}</Day>)}
-            </BoxWeekdays>
+              {(add) ? (
+                <AddHabits habilita={add}>
+                  <input className='habitsInputAdd' type='text' placeholder='nome do hábito'></input>
 
-            <ButtonBoxAdd >
-              <Cancel >Cancelar</Cancel>
-              <Save >Salvar</Save>
-            </ButtonBoxAdd>
-          </AddHabits>
+                  <BoxWeekdays >
+                    {weekdays.map((value, index) =>
+                      <Day
+                        key={index}
+                        className='day'
+                        onClick={(
+                          selectDay,
+                          setSelectedDay)
+                        }
+                        color={colors.color}
+                        backgroundColor={colors.backgroundColor}
 
+                      >{value}</Day>)}
+                  </BoxWeekdays>
 
-          {(numHabits) ? (
-            <Habit>
-              <DivAlt>
-                <p>ver narutinho</p>
-                <ion-icon name="trash-outline"></ion-icon>
-              </DivAlt>
+                  <ButtonBoxAdd >
+                    <Cancel >Cancelar</Cancel>
+                    <Save >Salvar</Save>
+                  </ButtonBoxAdd>
+                </AddHabits>
+              ) : (
+                null
+              )}
 
-              <BoxWeekdays >
-                {weekdays.map((value, index) => <Day key={index} className='day'>{value}</Day>)}
-              </BoxWeekdays>
-            </Habit>
-          ) : (
-            <h1>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</h1>
-          )}
+              {/*  */}
 
+              {(numHabits) ? (
+                <Habit>
+                  <DivAlt>
+                    <p>ver narutinho</p>
+                    <ion-icon name="trash-outline"></ion-icon>
+                  </DivAlt>
 
+                  <BoxWeekdays >
+                    {weekdays.map((value, index) => <Day key={index} className='day'>{value}</Day>)}
+                  </BoxWeekdays>
+                </Habit>
+              ) : (
+                <h1>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</h1>
+              )}
+            </BoxHabits>
+          </HabitsMain>
 
-
-
-
-        </BoxHabits>
-      </HabitsMain>
-
-      <Footer />
+          <Footer />
+        </>
+      ) : null}
     </>
+
   )
 }
+
+
 
 const HabitsMain = styled.div`
 
@@ -108,6 +144,8 @@ const HabitsTitle = styled.div`
 `
 
 const AddHabits = styled.div`
+  display: ${props => props.habilita ? 'inherits' : 'none'};
+
   width: 100%;
   height: 180px;
   margin-bottom: 15px;
@@ -125,6 +163,10 @@ const AddHabits = styled.div`
   padding: 5px;
 
   font-size: 20px;
+
+  outline: none;
+
+  transition: all linear 3000ms;/* acho q entra uma props aqui ou no display, na real */
 }
 `
 
@@ -144,7 +186,7 @@ const BoxHabits = styled.div`
 const Day = styled.li`
   width: 30px;
   height: 30px;
-  background: #ffffff;
+  background: ${(props) => props.backgroundColor};
   /* background-color: #CFCFCF; */
   border: 1px solid #d5d5d5;
   border-radius: 5px;
@@ -156,7 +198,7 @@ const Day = styled.li`
   align-items: center;
 
   font-size: 20px;
-  color: #d5d5d5;
+  color: ${(props) => props.color};
   /* color: #FFFFFF; */
 
   cursor: pointer;
@@ -178,6 +220,8 @@ const Cancel = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+
+  cursor: pointer;
 `
 
 const Save = styled.div`
@@ -191,6 +235,9 @@ const Save = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+
+  cursor: pointer;
+
 `
 
 /* SINGLE_HABIT */
