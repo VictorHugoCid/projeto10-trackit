@@ -9,7 +9,7 @@ import LogIn from './LogIn/LogIn'
 import SingUp from './SingUp/SingUp.js'
 import Habits from './Habits/Habits.js'
 import NavBar from './NavBar/NavBar'
-import Today from './Today/Today'
+import Today from './Today/TodayPage'
 import HistoricPage from './HistoricPage/HistoricPage'
 
 

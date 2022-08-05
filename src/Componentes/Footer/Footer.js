@@ -6,7 +6,7 @@ import {
     buildStyles
 } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
-
+import { Link } from "react-router-dom";
 
 export default function Footer() {
     const percentage = 75
@@ -14,26 +14,38 @@ export default function Footer() {
     return (
         <>
             <FooterStyle>
-                <p>Hábitos</p>
-                <p>Histórico</p>
-                <Circular>
-                    <CircularProgressbar
-                        value={percentage}
-                        text={`Hoje`}
-                        background
-                        backgroundPadding={6}
-                        styles={buildStyles({
-                            backgroundColor: "#52B6FF",
-                            textSize: '25px',
-                            textColor: "#FFFFFF",
-                            pathColor: "#FFFFFF",
-                            trailColor: "transparent",
-                            
-                        })}
-                    />
-                </Circular>
+                <div>
+                    <Link to='/habitos'>
+                        <p>Hábitos</p>
+                    </Link>
+                    <Link to='/historico'>
+                        <p>Histórico</p>
+                    </Link>
 
-                
+                </div>
+
+                <Link to='/hoje'>
+                    <Circular>
+                        <CircularProgressbar
+                            value={percentage}
+                            text={`Hoje`}
+                            background
+                            backgroundPadding={6}
+                            styles={buildStyles({
+                                backgroundColor: "#52B6FF",
+                                textSize: '25px',
+                                textColor: "#FFFFFF",
+                                pathColor: "#FFFFFF",
+                                trailColor: "transparent",
+
+                            })}
+                        />
+                    </Circular>
+
+                </Link>
+
+
+
             </FooterStyle>
         </>
     )
@@ -47,7 +59,6 @@ background-color: #FFFFFF;
 
 display: flex;
 align-items: center;
-justify-content: space-between;
 padding: 0 12%;
 
 position: fixed;
@@ -59,6 +70,12 @@ color: #52B6FF;
 
 p{
     cursor: pointer;
+}
+
+div{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
 }
 
 `

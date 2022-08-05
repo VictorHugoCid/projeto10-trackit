@@ -32,8 +32,8 @@ function getHabits(getConfig) {
     return axios.get(`${URL}/habits`, getConfig)
 }
 
-function getTodayHabits() {
-    return axios.get(`${URL}/habits/today`)
+function getTodayHabits(getConfig) {
+    return axios.get(`${URL}/habits/today`, getConfig)
 }
 
 function getHistoricHabits() {
