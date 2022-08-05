@@ -27,7 +27,8 @@ export default function LogIn() {
         promise
             .then(res => {
                 console.log(res.data)
-                setToken(res.data.token)
+                /* setToken(res.data.token) */
+                /* LEMBRAR DE MUDAR ESSA DIXGRAÇA */
                 navigate('/habitos')
             })
 

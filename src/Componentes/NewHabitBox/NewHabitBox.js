@@ -29,6 +29,8 @@ export default function NewHabitBox({add, setAdd}) {
     promise.then(res=>(
       console.log("resp api",res.data)
     )) */
+
+    setAdd(!add)
   }
   function cancel(){
     setArrayDays([])

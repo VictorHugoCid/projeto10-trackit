@@ -14,8 +14,8 @@ function logIn(body) {
     return axios.post(`${URL}/auth/login`, body)
 }
 
-function createHabit(body,getConfig) {
-    return axios.post(`${URL}/habits`, body,getConfig)
+function createHabit(body, getConfig) {
+    return axios.post(`${URL}/habits`, body, getConfig)
 }
 
 function checkHabit(body) {
@@ -28,31 +28,31 @@ function unCheckHabit(body) {
 
 //Gets
 
-function habits(){
-    return axios.get(`${URL}/habits`)
+function getHabits(getConfig) {
+    return axios.get(`${URL}/habits`, getConfig)
 }
 
-function getTodayHabits(){
+function getTodayHabits() {
     return axios.get(`${URL}/habits/today`)
 }
 
-function getHistoricHabits(){
+function getHistoricHabits() {
     return axios.get(`${URL}/habits/history/daily`)
 }
 
 //Delete
 
-function deleteHabit(){
+function deleteHabit() {
     return axios.delete(`${URL}/habits/ID_DO_HABITO`)
 }
 
-export{
+export {
     singUp,
     logIn,
     createHabit,
     checkHabit,
     unCheckHabit,
-    habits,
+    getHabits,
     getTodayHabits,
     getHistoricHabits,
     deleteHabit

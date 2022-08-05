@@ -14,13 +14,19 @@ import HistoricPage from './HistoricPage/HistoricPage'
 
 
 export default function App() {
-    const [token, setToken] = useState('');
+    /* const [token, setToken] = useState(''); */
+                /* LEMBRAR DE MUDAR ESSA DIXGRAÇA */
+
+    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDY3NSwiaWF0IjoxNjU5NzAzMzc2fQ.7wB-T8COllJKPTPRwMebBjg6pmzpwcucUHCZVTSBvsc'
+                /* LEMBRAR DE MUDAR ESSA DIXGRAÇA */
+
+
     const [arrayDays, setArrayDays] = useState([])
 
     return (
         <>
             <GlobalStyle />
-            <GlobalContext.Provider value= {{token, setToken, arrayDays, setArrayDays}}>
+            <GlobalContext.Provider value= {{token/* , setToken */, arrayDays, setArrayDays}}>
                 <BrowserRouter>
                     <Routes>
                         <Route path="/" element={<LogIn />} />

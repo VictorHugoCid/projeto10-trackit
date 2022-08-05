@@ -1,31 +1,30 @@
 import styled from "styled-components"
 import Habit from "../Habit/Habit"
+import { getHabits } from "../../Services/api"
+import getConfig from "../../Services/getConfig"
+import GlobalContext from "../../Context/GlobalContext"
+import { useContext, useEffect, useState } from "react"
 
 export default function HabitsList() {
 
-  const listaHabitos = [
-    {
-      id: 1,
-      name: "Nome do hábito",
-      days: [1, 3, 5]
-    },
-    {
-      id: 2,
-      name: "Nome do hábito 2",
-      days: [1, 3, 4, 6]
-    },
-    {
-      id: 3,
-      name: "Nome do hábito 3",
-      days: [1, 3, 5, 6]
-    }
-  ]
-  
-  /* recebe um objeto */
+const [habitsList, setHabitsList] = useState([])
+  const {token} = useContext(GlobalContext)  
+
+  useEffect(() => {
+    const promise = getHabits(getConfig(token))
+
+    promise.then(res => {
+      console.log(res.data)
+      setHabitsList(res.data)}
+    )
+
+  },[])
+
+
 
   return (
     <HabitListStyle>
-      {listaHabitos.map((value) => 
+      {habitsList.map((value) => 
         
         (<Habit
           key={value.id}
