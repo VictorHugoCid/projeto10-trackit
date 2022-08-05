@@ -5,7 +5,7 @@ import DaysList from "../DaysList/DaysList";
 export default function NewHabitBox() {
   const weekdays = ['D', 'S', 'T', 'Q', 'Q', 'S', 'S']
 
-  /* console.log(weekdays) */
+  const [selectedDays, setSelectedDays] = useState([])
 
   function addHabit(){
 
@@ -17,7 +17,10 @@ export default function NewHabitBox() {
         type='text' 
         placeholder='nome do hábito'></input>
 
-        <DaysList /> 
+        <DaysList 
+          selectedDays={selectedDays}
+          setSelectedDays={setSelectedDays}
+          /> 
 
       <ButtonBoxAdd >
         <Cancel >Cancelar</Cancel>

@@ -3,9 +3,13 @@ import Footer from "../Footer/Footer"
 import NavBar from "../NavBar/NavBar"
 import HabitsList from "../HabitsList/HabitsList"
 import NewHabitBox from "../NewHabitBox/NewHabitBox"
+import GlobalContext from "../../Context/GlobalContext"
+import getConfig from "../../Services/getConfig"
 
-import { useState } from "react"
+import { useContext, useState } from "react"
 import styled from 'styled-components'
+import { createHabit } from "../../Services/api"
+import axios from "axios"
 
 
 /*     TEM Q IMPORTAR ISSO AQUI
@@ -14,8 +18,25 @@ import styled from 'styled-components'
 
 export default function Habits() {
   const weekdays = ['D', 'S', 'T', 'Q', 'Q', 'S', 'S']
-
   const [add, setAdd] = useState(false) /* abrir e fechar a box de adição */
+
+  const{token} = useContext(GlobalContext)
+  const body = {
+    name:"nomezin",
+    days:[1,3,5],
+  }
+
+  /* const promise = createHabit(body,getConfig(token)) */
+
+  /* promise.then(res=>(
+    console.log(res.data)
+  )) */
+
+
+
+
+
+
 
   const numHabits = 1 /* LEMBRAR DE TIRAR ISSO AQUI */
   return (

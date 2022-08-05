@@ -2,41 +2,50 @@ import styled from 'styled-components';
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios';
 import logo from './logo.png'
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { logIn } from '../../Services/api'
+
+import GlobalContext from '../../Context/GlobalContext';
 
 export default function LogIn() {
 
-    const navigate = useNavigate()
+    const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    
+    const {token, setToken} = useContext(GlobalContext);
 
-    function sendForm(){
+
+    function sendForm() {
         const body = {
             email,
             password,
         }
 
-        const promise = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login', body)
+        const promise = logIn(body)
 
         promise
-            .then(res =>{
+            .then(res => {
                 console.log(res.data)
+                setToken(res.data.token)
                 navigate('/habitos')
             })
 
     }
 
     return (
+
+
         <LoginBox className='loginBox'>
             <img src={logo} alt='Track-it' />
-            <InputLogin 
-                type='email' 
+            <InputLogin
+                type='email'
                 placeholder='email'
                 onChange={(e) => setEmail(e.target.value)}
                 value={email}
             />
-            <InputLogin 
-                type='password' 
+            <InputLogin
+                type='password'
                 placeholder='senha'
                 onChange={(e) => setPassword(e.target.value)}
                 value={password}
@@ -46,6 +55,7 @@ export default function LogIn() {
                 <p>Não tem uma conta? Cadastre-se!</p>
             </Link>
         </LoginBox>
+
 
     )
 }

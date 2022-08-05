@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { singUp } from '../../Services/api'
 import styled from 'styled-components'
 
 import logo from './logo.png'
@@ -32,14 +33,14 @@ export default function SingUp() {
             name:form.name,
             image:form.image,
             password:form.password,
-        } *//*  OU SE UMA FORMA MAIS ELEGANTE: */
+        } 
+        *//*  OU DE UMA FORMA MAIS ELEGANTE: */
 
         const body ={
             ...form,
         }
-
         
-        const promise = axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up',body);
+        const promise = singUp(body)
 
         promise.then(res => {
             navigate('/');

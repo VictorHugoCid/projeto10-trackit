@@ -2,8 +2,7 @@ import { useState } from "react"
 import styled from "styled-components"
 
 
-
-export default function Day({ weekday }) {
+export default function Day({ weekday, id, name, days,index }) {
 
     const [colors, setColors] = useState({})
     const [selectedDay, setSelectedDay] = useState(false)
@@ -11,10 +10,18 @@ export default function Day({ weekday }) {
     const busy = { color: '#FFFFFF', background: '#d5d5d5' }
     const free = { color: '#d5d5d5', background: '#FFFFFF' }
   
+/*     function colorGetHabits(){
+      console.log(days,index, days.includes(index))
+      if(days.includes(index)){
+        
+        setColors({...busy})
+      }
+
+    } */
+      
     function selectDay() {
       setSelectedDay(!selectedDay)
-      console.log(selectedDay)
-  
+
       if (selectedDay === false) {
         setColors({ ...busy })
       } else {
@@ -29,6 +36,7 @@ export default function Day({ weekday }) {
             color={colors.color}
             background={colors.background}>
             {weekday}
+            
         </DayStyle>
 
     )

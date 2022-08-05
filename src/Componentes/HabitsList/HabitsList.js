@@ -1,76 +1,50 @@
 import styled from "styled-components"
+import Habit from "../Habit/Habit"
 
-export default function HabitsList({weekdays}) {
+export default function HabitsList() {
 
-    return (
-        <>
-        <Habit>
-            <DivAlt>
-                <p>ver narutinho</p>
-                <ion-icon name="trash-outline"></ion-icon>
-            </DivAlt>
+  const listaHabitos = [
+    {
+      id: 1,
+      name: "Nome do hábito",
+      days: [1, 3, 5]
+    },
+    {
+      id: 2,
+      name: "Nome do hábito 2",
+      days: [1, 3, 4, 6]
+    },
+    {
+      id: 3,
+      name: "Nome do hábito 3",
+      days: [1, 3, 5, 6]
+    }
+  ]
+  
+  /* recebe um objeto */
 
-            <BoxWeekdays >
-                {weekdays.map((value, index) => <Day key={index}>{value}</Day>)}
-            </BoxWeekdays>
-        </Habit>
+  return (
+    <HabitListStyle>
+      {listaHabitos.map((value) => 
+        
+        (<Habit
+          id={value.id}
+          name={value.name}
+          days={value.days}
+        />)
 
-        <Habit>
-            <DivAlt>
-                <p>ver narutinho</p>
-                <ion-icon name="trash-outline"></ion-icon>
-            </DivAlt>
+      )}
+    </HabitListStyle>
 
-            <BoxWeekdays >
-                {weekdays.map((value, index) => <Day key={index}>{value}</Day>)}
-            </BoxWeekdays>
-        </Habit>
-        </>
-    )
+  )
 }
 
-const Habit = styled.div`
+const HabitListStyle = styled.div`
   width: 100%;
-  height: 90px;
+  height: auto;
   margin-bottom: 15px;
   border-radius: 5px;
 
-  padding: 15px;
-  background-color: #ffffff;
-
   font-size: 20px;
   color: #666666;
-`
-
-const BoxWeekdays = styled.div`
-  margin-top: 10px;
-  display: flex;
-`
-
-
-const DivAlt = styled.div`
-  display: flex;
-  justify-content: space-between;
-    
-`
-
-const Day = styled.li`
-  width: 30px;
-  height: 30px;
-  background: #FFFFFF/* ${(props) => props.backgroundColor} */;
-  /* background-color: #CFCFCF; */
-  border: 1px solid #d5d5d5;
-  border-radius: 5px;
-  margin-right: 8px;
-  margin-bottom: 40px;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  font-size: 20px;
-  color: #d5d5d5/* ${(props) => props.color} */;
-  /* color: #FFFFFF; */
-
-  cursor: pointer;
 `

@@ -1,7 +1,9 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import styled from 'styled-components'
 import '../Styles/reset.css'
-import GlobalStyle from '../Styles/globalStyle'; 
+import GlobalStyle from '../Styles/globalStyle';
+import { useState } from 'react';
+import GlobalContext from '../Context/GlobalContext';
 
 import LogIn from './LogIn/LogIn'
 import SingUp from './SingUp/SingUp.js'
@@ -12,22 +14,26 @@ import HistoricPage from './HistoricPage/HistoricPage'
 
 
 export default function App() {
+    const [token, setToken] = useState('');
 
     return (
         <>
             <GlobalStyle />
-            <BrowserRouter>
-                <Routes>
-                    <Route path="/" element={<LogIn />} />
-                    <Route path="/cadastro" element={<SingUp />} /> 
+            <GlobalContext.Provider value= {{token, setToken}}>
+                <BrowserRouter>
+                    <Routes>
+                        <Route path="/" element={<LogIn />} />
+                        <Route path="/cadastro" element={<SingUp />} />
+                        <Route path="/habitos" element={<Habits />} />
+
+                        <Route path="/hoje" element={<Today />} />
+                        <Route path="/historico" element={<HistoricPage />} />
+                    </Routes>
+                </BrowserRouter>
 
 
-                     <Route path="/habitos" element={<Habits />} />
+            </GlobalContext.Provider>
 
-                    {/* <Route path="/hoje" element={<Today />} /> */}
-                    {/* <Route path="/" element={<HistoricPage />} /> */}
-                </Routes>
-            </BrowserRouter>
 
         </>
     );
