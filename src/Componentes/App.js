@@ -15,11 +15,12 @@ import HistoricPage from './HistoricPage/HistoricPage'
 
 export default function App() {
     const [token, setToken] = useState('');
+    const [arrayDays, setArrayDays] = useState([])
 
     return (
         <>
             <GlobalStyle />
-            <GlobalContext.Provider value= {{token, setToken}}>
+            <GlobalContext.Provider value= {{token, setToken, arrayDays, setArrayDays}}>
                 <BrowserRouter>
                     <Routes>
                         <Route path="/" element={<LogIn />} />

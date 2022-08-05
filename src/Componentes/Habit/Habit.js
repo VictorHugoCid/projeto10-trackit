@@ -8,7 +8,7 @@ export default function Habit({selectedDays, setSelectedDays,id, name, days}) {
     return (
         <HabitStyle>
             <DivAlt>
-                <p>Nome do projeto</p>
+                <p>{name}</p>
                 <ion-icon name="trash-outline"></ion-icon>
             </DivAlt>
             <DaysList 

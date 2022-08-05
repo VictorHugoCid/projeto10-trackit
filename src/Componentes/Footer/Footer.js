@@ -71,5 +71,5 @@ bottom: 20px;
 left: Calc(50vw - 45px);
 
 font-size: 20px;
-
+font-weight: bold;
 `

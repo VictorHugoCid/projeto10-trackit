@@ -28,6 +28,7 @@ export default function HabitsList() {
       {listaHabitos.map((value) => 
         
         (<Habit
+          key={value.id}
           id={value.id}
           name={value.name}
           days={value.days}

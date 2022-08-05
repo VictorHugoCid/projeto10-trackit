@@ -20,23 +20,6 @@ export default function Habits() {
   const weekdays = ['D', 'S', 'T', 'Q', 'Q', 'S', 'S']
   const [add, setAdd] = useState(false) /* abrir e fechar a box de adição */
 
-  const{token} = useContext(GlobalContext)
-  const body = {
-    name:"nomezin",
-    days:[1,3,5],
-  }
-
-  /* const promise = createHabit(body,getConfig(token)) */
-
-  /* promise.then(res=>(
-    console.log(res.data)
-  )) */
-
-
-
-
-
-
 
   const numHabits = 1 /* LEMBRAR DE TIRAR ISSO AQUI */
   return (
@@ -54,7 +37,7 @@ export default function Habits() {
 
         <BoxHabits >
           {(add) ? (
-            <NewHabitBox /* weekdays={weekdays} */ />
+            <NewHabitBox add={add} setAdd={setAdd} />
 
           ) : (
             null

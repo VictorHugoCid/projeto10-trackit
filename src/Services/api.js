@@ -14,8 +14,8 @@ function logIn(body) {
     return axios.post(`${URL}/auth/login`, body)
 }
 
-function createHabit(body) {
-    return axios.post(`${URL}/habits`, body)
+function createHabit(body,getConfig) {
+    return axios.post(`${URL}/habits`, body,getConfig)
 }
 
 function checkHabit(body) {

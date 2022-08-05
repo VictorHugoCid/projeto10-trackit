@@ -1,5 +1,7 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
 import styled from "styled-components"
+
+import GlobalContext from "../../Context/GlobalContext"
 
 
 export default function Day({ weekday, id, name, days,index }) {
@@ -9,6 +11,8 @@ export default function Day({ weekday, id, name, days,index }) {
   
     const busy = { color: '#FFFFFF', background: '#d5d5d5' }
     const free = { color: '#d5d5d5', background: '#FFFFFF' }
+
+    const {arrayDays, setArrayDays} = useContext(GlobalContext)
   
 /*     function colorGetHabits(){
       console.log(days,index, days.includes(index))
@@ -22,13 +26,30 @@ export default function Day({ weekday, id, name, days,index }) {
     function selectDay() {
       setSelectedDay(!selectedDay)
 
+      console.log(index)
+      console.log('antes:',arrayDays)
+
+      if(!arrayDays.includes(index)){
+        setArrayDays([...arrayDays, index])
+      }else{
+        const arrAuxId = [...arrayDays]
+
+        for (let i = 0; i < arrayDays.length; i++) {
+          if(arrayDays[i] === index){
+            arrAuxId.splice(i,1)
+
+
+            setArrayDays(arrAuxId)
+          }
+        }
+      }
+
       if (selectedDay === false) {
         setColors({ ...busy })
       } else {
         setColors({ ...free })
       }
     } 
-
     return (
 
         <DayStyle

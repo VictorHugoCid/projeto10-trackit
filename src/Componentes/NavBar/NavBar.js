@@ -1,13 +1,18 @@
+import { Link } from 'react-router-dom'
 import './NavBar.css'
 
-export default function NavBar(){
+
+export default function NavBar() {
 
 
-    return(
+    return (
         <div className="navBar">
-            <p>Trackit</p>
+            <Link to='/'>
+                <p>Trackit</p>
+            </Link>
 
-            <div className='navBarImg' src='' alt='IMG'/>
+
+            <div className='navBarImg' src='' alt='IMG' />
         </div>
     )
 

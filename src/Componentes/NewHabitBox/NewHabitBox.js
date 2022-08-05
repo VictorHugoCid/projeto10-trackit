@@ -1,30 +1,60 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import styled from "styled-components";
 import DaysList from "../DaysList/DaysList";
+import GlobalContext from "../../Context/GlobalContext";
+import { createHabit } from "../../Services/api";
+import getConfig from "../../Services/getConfig";
 
-export default function NewHabitBox() {
+export default function NewHabitBox({add, setAdd}) {
   const weekdays = ['D', 'S', 'T', 'Q', 'Q', 'S', 'S']
+    /* AQUI TA RODANDO BONITINHO */
 
   const [selectedDays, setSelectedDays] = useState([])
+  const { token } = useContext(GlobalContext)
+  const {arrayDays, setArrayDays} =useContext(GlobalContext)
 
-  function addHabit(){
+  const [name, setName] = useState('')
 
+  const body = {
+    name: name,
+    days: arrayDays,
   }
+
+  function addHabit() {
+    console.log('token:',token)
+    console.log('body:',body)
+
+/*     const promise = createHabit(body,getConfig(token))
+
+    promise.then(res=>(
+      console.log("resp api",res.data)
+    )) */
+  }
+  function cancel(){
+    setArrayDays([])
+    setName('')
+    setAdd(!add)
+    /*  falta mudar o placeholder */
+    /* e tirar as marcações */
+  }
+
 
   return (
     <AddHabits >
-      <input 
-        type='text' 
-        placeholder='nome do hábito'></input>
+      <input
+        type='text'
+        placeholder='nome do hábito'
+        onChange={(e) => setName(e.target.value)}
+        ></input>
 
-        <DaysList 
-          selectedDays={selectedDays}
-          setSelectedDays={setSelectedDays}
-          /> 
+      <DaysList
+        selectedDays={selectedDays}
+        setSelectedDays={setSelectedDays}
+      />
 
       <ButtonBoxAdd >
-        <Cancel >Cancelar</Cancel>
-        <Save onClick={addHabit()}>Salvar</Save>
+        <Cancel onClick={cancel}>Cancelar</Cancel>
+        <Save onClick={addHabit}>Salvar</Save>
       </ButtonBoxAdd>
     </AddHabits>
   )
