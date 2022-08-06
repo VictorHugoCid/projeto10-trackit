@@ -7,9 +7,9 @@ import dayjs from "dayjs";
 import updateLocale from "dayjs/plugin/updateLocale";
 import "dayjs/locale/pt-br";
 
-import NavBar from "../NavBar/NavBar";
-import Footer from "../Footer/Footer";
-import TodayHabit from './TodayHabit'
+import NavBar from '../commons/navbar/NavBar'
+import Footer from "../commons/footer/Footer";
+import TodayHabit from '../Today/TodayHabit'
 
 
 export default function Today() {
@@ -24,13 +24,13 @@ export default function Today() {
     const {
         token,
         checkArray,
-        percentage } = useContext(GlobalContext)
+        percentage,
+        reload,
+        setReload } = useContext(GlobalContext)
 
 
     const [todayHabits, setTodayHabits] = useState([])
     const [auxPercent, setAuxPercent] = useState()
-
-    const [reload, setReload] = useState(true)
 
     useEffect(() => {
         const promise = getTodayHabits(getConfig(token))
@@ -40,8 +40,6 @@ export default function Today() {
             setAuxPercent(res.data.length)
         })
     }, [reload])
-
-    const habitosFeitos = 1
 
     return (
         <TodayMain>
@@ -61,8 +59,6 @@ export default function Today() {
                     highestSequence={value.highestSequence}
                     habitId={value.id}
                     auxPercent={auxPercent}
-                    reload={reload}
-                    setReload={setReload}
                 />
             ))}
 

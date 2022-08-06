@@ -17,7 +17,8 @@ export default function LogIn() {
         token,
         setToken,
         disable,
-        setDisable } = useContext(GlobalContext);
+        setDisable,
+        setImage } = useContext(GlobalContext);
 
 
     function sendForm() {
@@ -35,7 +36,7 @@ export default function LogIn() {
                 alert("Erro ao logar")
             })
             .then(res => {
-                console.log(res.data)
+                setImage(res.data.image)
                 /* setToken(res.data.token) */
                 /* LEMBRAR DE MUDAR ESSA DIXGRAÇA */
                 navigate('/hoje')

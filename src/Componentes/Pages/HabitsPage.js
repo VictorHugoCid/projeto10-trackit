@@ -1,6 +1,6 @@
 
-import Footer from "../Footer/Footer"
-import NavBar from "../NavBar/NavBar"
+import NavBar from '../commons/navbar/NavBar'
+import Footer from "../commons/footer/Footer";
 import HabitsList from "../HabitsList/HabitsList"
 import NewHabitBox from "../NewHabitBox/NewHabitBox"
 import GlobalContext from "../../Context/GlobalContext"

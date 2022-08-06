@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
-import NavBar from "../NavBar/NavBar";
-import Footer from "../Footer/Footer";
+
+import NavBar from '../commons/navbar/NavBar'
+import Footer from "../commons/footer/Footer";
 import { getHistoricHabits } from "../../Services/api";
 import getConfig from "../../Services/getConfig";
 import { useContext } from "react";

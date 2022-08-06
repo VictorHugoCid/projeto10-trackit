@@ -6,27 +6,29 @@ import { checkHabit } from "../../Services/api"
 import { unCheckHabit } from "../../Services/api"
 import getConfig from "../../Services/getConfig"
 
-export default function TodayHabit({ title, isDone, currentSequence, highestSequence, habitId, auxPercent, reload, setReload }) {
+export default function TodayHabit({ title, isDone, currentSequence, highestSequence, habitId, auxPercent}) {
 
     const {
-        token, 
-        setPercentage, 
-        checkArray, 
-        setcheckArray} = useContext(GlobalContext)
+        token,
+        setPercentage,
+        checkArray,
+        setcheckArray,
+        reload,
+        setReload } = useContext(GlobalContext)
 
     const [check, setCheck] = useState(false)
 
     const uncheckColor = { color: '#FFFFFF', background: '#d5d5d5' }
     const checkColor = { color: '#FFFFFF', background: '#8FC549' }
 
-    const [colors, setColors] = useState({...uncheckColor})
+    const [colors, setColors] = useState({ ...uncheckColor })
 
-    function postCheck(){
+    function postCheck() {
         /* console.log('postCheck',habitId) */
         const promise = checkHabit(habitId, getConfig(token))
     }
 
-    function postUnCheck(){
+    function postUnCheck() {
         /* console.log('postUn-Check',habitId) */
         const promise = unCheckHabit(habitId, getConfig(token))
     }
@@ -34,29 +36,28 @@ export default function TodayHabit({ title, isDone, currentSequence, highestSequ
     function checked() {
 
         if (check === false) {
-            setColors({...checkColor})
+            setColors({ ...checkColor })
             postCheck()
             setcheckArray([...checkArray, habitId])
-            
+
 
         } else {
-            setColors({...uncheckColor})
+            setColors({ ...uncheckColor })
             postUnCheck()
             const arrayAux = [...checkArray]
             for (let i = 0; i < checkArray.length; i++) {
-                if(checkArray[i] === habitId){
-                    arrayAux.splice(i,1)
+                if (checkArray[i] === habitId) {
+                    arrayAux.splice(i, 1)
 
                     setcheckArray([...arrayAux])
                 }
             }
         }
-
-        setCheck(!check)
         setReload(!reload)
+        setCheck(!check)
     }
-    setPercentage(Math.round(checkArray.length/auxPercent*100))
-    console.log(reload)
+
+    setPercentage(Math.round(checkArray.length / auxPercent * 100))
 
     return (
         <Habit>

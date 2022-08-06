@@ -42,8 +42,8 @@ function getHistoricHabits(getConfig) {
 
 //Delete
 
-function deleteHabit() {
-    return axios.delete(`${URL}/habits/ID_DO_HABITO`)
+function deleteHabit(id, getConfig) {
+    return axios.delete(`${URL}/habits/${id}`,getConfig)
 }
 
 export {

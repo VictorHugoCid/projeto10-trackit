@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import DaysList from "../DaysList/DaysList";
 import GlobalContext from "../../Context/GlobalContext";
@@ -8,7 +8,6 @@ import { ThreeDots } from 'react-loader-spinner';
 
 export default function NewHabitBox({ add, setAdd }) {
   const weekdays = ['D', 'S', 'T', 'Q', 'Q', 'S', 'S']
-  /* AQUI TA RODANDO BONITINHO */
 
   const [selectedDays, setSelectedDays] = useState([])
   const {
@@ -16,7 +15,9 @@ export default function NewHabitBox({ add, setAdd }) {
     arrayDays,
     setArrayDays,
     disable,
-    setDisable } = useContext(GlobalContext)
+    setDisable,
+    reload,
+    setReload } = useContext(GlobalContext)
 
 
   const [name, setName] = useState('')
@@ -28,22 +29,20 @@ export default function NewHabitBox({ add, setAdd }) {
 
   function addHabit() {
     setDisable(true)
-    console.log('token:', token)
-    console.log('body:', body)
+    console.log('Habito criado')
 
- /*    const promise = createHabit(body, getConfig(token))
+      const promise = createHabit(body, getConfig(token))
 
-    promise.then(res => (
-      console.log("resp api", res.data)
-    )) */
-
-
-
-
+      promise.then(res => {
+        console.log("resp api", res.data)
+        setReload(!reload)
+      })
 
     /* setDisable(false) */
-    /* setAdd(!add) */
+    setAdd(!add)
+    
   }
+
   function cancel() {
     setArrayDays([])
     setName('')
