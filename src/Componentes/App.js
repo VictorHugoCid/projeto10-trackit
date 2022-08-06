@@ -18,6 +18,7 @@ export default function App() {
     /* LEMBRAR DE MUDAR ESSA DIXGRAÇA */
 
     const [percentage, setPercentage] = useState(0)
+    const [disable, setDisable] = useState(false)
 
     const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDY3NSwiaWF0IjoxNjU5NzM4NTk3fQ.y3K7shd9OTwQmN7AxNdr77wPqsYQt522ttGl6_ZGbkE'
 
@@ -25,13 +26,21 @@ export default function App() {
 
     const [checkArray, setcheckArray] = useState([])
 
-
     const [arrayDays, setArrayDays] = useState([])
 
     return (
         <>
             <GlobalStyle />
-            <GlobalContext.Provider value={{ token/* , setToken */, arrayDays, setArrayDays, checkArray, setcheckArray, percentage, setPercentage }}>
+            <GlobalContext.Provider value={
+                { token/* , setToken */, 
+                arrayDays, 
+                setArrayDays, 
+                checkArray, 
+                setcheckArray, 
+                percentage, 
+                setPercentage,
+                disable,
+                setDisable }}>
                 <BrowserRouter>
                     <Routes>
                         <Route path="/" element={<LogIn />} />

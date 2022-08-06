@@ -1,22 +1,26 @@
 import axios from 'axios'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { singUp } from '../../Services/api'
 import styled from 'styled-components'
+import { ThreeDots } from 'react-loader-spinner';
+import GlobalContext from '../../Context/GlobalContext';
 
 import logo from './logo.png'
 
 export default function SingUp() {
 
+    const { disable, setDisable } = useContext(GlobalContext)
+
     const navigate = useNavigate()
     const [form, setForm] = useState({
-        email:'',
-        name:'',
-        image:'',
-        password:'',
+        email: '',
+        name: '',
+        image: '',
+        password: '',
     });
 
-    function handleForm(event){
+    function handleForm(event) {
         console.log(event.target.name, event.target.value);
         setForm({
             ...form,
@@ -25,61 +29,77 @@ export default function SingUp() {
         });
     }
 
-    function sendForm(){
+    function sendForm() {
         console.log(form);
+        setDisable(!disable)
 
-/*         const body ={
-            email:form.email,
-            name:form.name,
-            image:form.image,
-            password:form.password,
-        } 
-        *//*  OU DE UMA FORMA MAIS ELEGANTE: */
+        /*         const body ={
+                    email:form.email,
+                    name:form.name,
+                    image:form.image,
+                    password:form.password,
+                } 
+                *//*  OU DE UMA FORMA MAIS ELEGANTE: */
 
-        const body ={
+        const body = {
             ...form,
         }
-        
+
         const promise = singUp(body)
 
-        promise.then(res => {
+        promise
+            .catch(()=> {
+                alert("Erro ao se cadastrar")
+            })
+            .then(res => {
             navigate('/');
         })
+
         
     }
 
     return (
         <SingUpBox>
             <img src={logo} alt='Track-it'></img>
-            <InputSingUp 
-                type='email' 
+            <InputSingUp
+                type='email'
                 placeholder='E-mail'
                 name='email'
                 onChange={handleForm}
                 value={form.email}
             />
-            <InputSingUp 
-                type='password' 
+            <InputSingUp
+                type='password'
                 placeholder='senha'
                 name='password'
                 onChange={handleForm}
                 value={form.password}
             />
-            <InputSingUp 
-                type='text' 
+            <InputSingUp
+                type='text'
                 placeholder='nome'
                 name='name'
                 onChange={handleForm}
                 value={form.name}
             />
-            <InputSingUp 
-                type='source' 
+            <InputSingUp
+                type='source'
                 placeholder='foto'
                 name='image'
                 onChange={handleForm}
                 value={form.image}
             />
-            <SingUpButton onClick={sendForm}>Cadastrar</SingUpButton>
+            <SingUpButton onClick={sendForm}>
+                {(disable) ? (
+                    <ThreeDots
+                        color='#FFFFFF'
+                        width={80}
+                        timeout={2000}
+                    />
+                ) : (
+                    <>Cadastrar</>
+                )}
+            </SingUpButton>
             <Link to={`/`}>
                 <p>Já tem uma conta? Faça login!</p>
             </Link>
@@ -143,5 +163,7 @@ const SingUpButton = styled.div`
 
     cursor: pointer;
 
+`
+const Spinner = styled.div`
 
 `

@@ -4,7 +4,7 @@ import axios from 'axios';
 import logo from './logo.png'
 import { useContext, useState } from 'react';
 import { logIn } from '../../Services/api'
-
+import { ThreeDots } from 'react-loader-spinner';
 import GlobalContext from '../../Context/GlobalContext';
 
 export default function LogIn() {
@@ -12,11 +12,17 @@ export default function LogIn() {
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    
-    const {token, setToken} = useContext(GlobalContext);
+
+    const {
+        token,
+        setToken,
+        disable,
+        setDisable } = useContext(GlobalContext);
 
 
     function sendForm() {
+        setDisable(true)
+
         const body = {
             email,
             password,
@@ -25,12 +31,17 @@ export default function LogIn() {
         const promise = logIn(body)
 
         promise
+            .catch(()=> {
+                alert("Erro ao logar")
+            })
             .then(res => {
                 console.log(res.data)
                 /* setToken(res.data.token) */
                 /* LEMBRAR DE MUDAR ESSA DIXGRAÇA */
-                navigate('/habitos')
+                navigate('/hoje')
+                setTimeout(() =>setDisable(false), 2000)
             })
+
 
     }
 
@@ -51,7 +62,17 @@ export default function LogIn() {
                 onChange={(e) => setPassword(e.target.value)}
                 value={password}
             />
-            <LoginButton className='loginButton' onClick={sendForm}>Entrar</LoginButton>
+            <LoginButton className='loginButton' onClick={sendForm}>
+                {(disable) ? (
+                    <ThreeDots
+                        color='#FFFFFF'
+                        width={80}
+                        timeout={2000}
+                    />
+                ) : (
+                    <>Entrar</>
+                )}
+            </LoginButton>
             <Link to={`/cadastro`}>
                 <p>Não tem uma conta? Cadastre-se!</p>
             </Link>
@@ -117,5 +138,9 @@ const LoginButton = styled.div`
     color: #ffffff;
 
     cursor: pointer;
+
+`
+
+const Spinner = styled.div`
 
 `

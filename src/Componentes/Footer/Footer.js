@@ -7,9 +7,11 @@ import {
 } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import GlobalContext from "../../Context/GlobalContext";
 
 export default function Footer() {
-    const percentage = 75
+    const{percentage} = useContext(GlobalContext)
 
     return (
         <>

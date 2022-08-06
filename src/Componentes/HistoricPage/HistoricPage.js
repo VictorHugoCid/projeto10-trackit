@@ -1,10 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import NavBar from "../NavBar/NavBar";
 import Footer from "../Footer/Footer";
+import { getHistoricHabits } from "../../Services/api";
+import getConfig from "../../Services/getConfig";
+import { useContext } from "react";
+import GlobalContext from "../../Context/GlobalContext";
 
 
 export default function HistoricPage(){
+
+    const {token} = useContext(GlobalContext)
+    useEffect(()=>{
+        const promise = getHistoricHabits(getConfig(token))
+
+        promise
+            .then((res) => {
+                console.log(res.data)
+            })
+    },[])
 
 
     return(

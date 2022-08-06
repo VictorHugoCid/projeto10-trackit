@@ -4,14 +4,20 @@ import DaysList from "../DaysList/DaysList";
 import GlobalContext from "../../Context/GlobalContext";
 import { createHabit } from "../../Services/api";
 import getConfig from "../../Services/getConfig";
+import { ThreeDots } from 'react-loader-spinner';
 
-export default function NewHabitBox({add, setAdd}) {
+export default function NewHabitBox({ add, setAdd }) {
   const weekdays = ['D', 'S', 'T', 'Q', 'Q', 'S', 'S']
-    /* AQUI TA RODANDO BONITINHO */
+  /* AQUI TA RODANDO BONITINHO */
 
   const [selectedDays, setSelectedDays] = useState([])
-  const { token } = useContext(GlobalContext)
-  const {arrayDays, setArrayDays} =useContext(GlobalContext)
+  const {
+    token,
+    arrayDays,
+    setArrayDays,
+    disable,
+    setDisable } = useContext(GlobalContext)
+
 
   const [name, setName] = useState('')
 
@@ -21,19 +27,24 @@ export default function NewHabitBox({add, setAdd}) {
   }
 
   function addHabit() {
-    console.log('token:',token)
-    console.log('body:',body)
+    setDisable(true)
+    console.log('token:', token)
+    console.log('body:', body)
 
-    const promise = createHabit(body,getConfig(token))
+ /*    const promise = createHabit(body, getConfig(token))
 
-    promise.then(res=>(
-      console.log("resp api",res.data)
-    ))
+    promise.then(res => (
+      console.log("resp api", res.data)
+    )) */
 
-    setAdd(!add)
 
+
+
+
+    /* setDisable(false) */
+    /* setAdd(!add) */
   }
-  function cancel(){
+  function cancel() {
     setArrayDays([])
     setName('')
     setAdd(!add)
@@ -48,7 +59,7 @@ export default function NewHabitBox({add, setAdd}) {
         type='text'
         placeholder='nome do hábito'
         onChange={(e) => setName(e.target.value)}
-        ></input>
+      ></input>
 
       <DaysList
         selectedDays={selectedDays}
@@ -57,7 +68,17 @@ export default function NewHabitBox({add, setAdd}) {
 
       <ButtonBoxAdd >
         <Cancel onClick={cancel}>Cancelar</Cancel>
-        <Save onClick={addHabit}>Salvar</Save>
+        <Save onClick={addHabit}>
+          {(disable) ? (
+            <ThreeDots
+              color='#FFFFFF'
+              width={50}
+              timeout={2000}
+            />
+          ) : (
+            <>Salvar</>
+          )}
+        </Save>
       </ButtonBoxAdd>
     </AddHabits>
   )

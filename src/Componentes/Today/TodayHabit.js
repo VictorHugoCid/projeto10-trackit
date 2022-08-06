@@ -6,12 +6,14 @@ import { checkHabit } from "../../Services/api"
 import { unCheckHabit } from "../../Services/api"
 import getConfig from "../../Services/getConfig"
 
-export default function TodayHabit({ title, isDone, currentSequence, highestSequence, habitId, auxPercent }) {
+export default function TodayHabit({ title, isDone, currentSequence, highestSequence, habitId, auxPercent, reload, setReload }) {
 
-    const {token} = useContext(GlobalContext)
+    const {
+        token, 
+        setPercentage, 
+        checkArray, 
+        setcheckArray} = useContext(GlobalContext)
 
-    const {percentage, setPercentage} = useContext(GlobalContext)
-    const {checkArray, setcheckArray} = useContext(GlobalContext)
     const [check, setCheck] = useState(false)
 
     const uncheckColor = { color: '#FFFFFF', background: '#d5d5d5' }
@@ -20,12 +22,12 @@ export default function TodayHabit({ title, isDone, currentSequence, highestSequ
     const [colors, setColors] = useState({...uncheckColor})
 
     function postCheck(){
-        console.log('postCheck',habitId)
+        /* console.log('postCheck',habitId) */
         const promise = checkHabit(habitId, getConfig(token))
     }
 
     function postUnCheck(){
-        console.log('postUn-Check',habitId)
+        /* console.log('postUn-Check',habitId) */
         const promise = unCheckHabit(habitId, getConfig(token))
     }
 
@@ -51,10 +53,10 @@ export default function TodayHabit({ title, isDone, currentSequence, highestSequ
         }
 
         setCheck(!check)
-        
+        setReload(!reload)
     }
-    setPercentage(Number(checkArray.length/auxPercent*100))
-    console.log(checkArray, percentage)
+    setPercentage(Math.round(checkArray.length/auxPercent*100))
+    console.log(reload)
 
     return (
         <Habit>

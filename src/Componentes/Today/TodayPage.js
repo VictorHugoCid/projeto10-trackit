@@ -3,7 +3,9 @@ import styled from "styled-components";
 import { getTodayHabits } from "../../Services/api";
 import getConfig from "../../Services/getConfig";
 import GlobalContext from "../../Context/GlobalContext";
-
+import dayjs from "dayjs";
+import updateLocale from "dayjs/plugin/updateLocale";
+import "dayjs/locale/pt-br";
 
 import NavBar from "../NavBar/NavBar";
 import Footer from "../Footer/Footer";
@@ -12,46 +14,58 @@ import TodayHabit from './TodayHabit'
 
 export default function Today() {
 
-    const {percentage} = useContext(GlobalContext)
-    const {checkArray} = useContext(GlobalContext)
-    const { token } = useContext(GlobalContext)
+    dayjs.locale("pt-br");
+    dayjs.extend(updateLocale);
+    dayjs.updateLocale("pt-br", {
+        weekdays: ["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"],
+    });
+
+
+    const {
+        token,
+        checkArray,
+        percentage } = useContext(GlobalContext)
+
 
     const [todayHabits, setTodayHabits] = useState([])
     const [auxPercent, setAuxPercent] = useState()
+
+    const [reload, setReload] = useState(true)
 
     useEffect(() => {
         const promise = getTodayHabits(getConfig(token))
 
         promise.then((res) => {
-            console.log(res.data)
             setTodayHabits(res.data)
             setAuxPercent(res.data.length)
         })
-    }, [])
-    
+    }, [reload])
+
     const habitosFeitos = 1
 
     return (
         <TodayMain>
             <NavBar />
             <TodayTitle>
-                <h1>Segunda-Feira 17/05</h1>
+                <h1>{dayjs().format('dddd, DD/MM')}</h1>
                 <>
                     {(percentage) ? (<h3>{`${percentage}% dos hábitos concluídos`}</h3>) : (<h2>Nenhum hábito concluído ainda</h2>)}
                 </>
             </TodayTitle>
             {todayHabits.map((value) => (
-                <TodayHabit 
+                <TodayHabit
                     key={value.id}
                     title={value.name}
                     isDone={value.done}
-                    currentSequence = {value.currentSequence}
-                    highestSequence = {value.highestSequence}
+                    currentSequence={value.currentSequence}
+                    highestSequence={value.highestSequence}
                     habitId={value.id}
                     auxPercent={auxPercent}
+                    reload={reload}
+                    setReload={setReload}
                 />
             ))}
-            
+
             <Footer />
         </TodayMain>
 
