@@ -20,7 +20,7 @@ export default function Habits() {
   const weekdays = ['D', 'S', 'T', 'Q', 'Q', 'S', 'S']
   const [add, setAdd] = useState(false) /* abrir e fechar a box de adição */
 
-
+  const [reload, setReload] = useState(false)
   const numHabits = 1 /* LEMBRAR DE TIRAR ISSO AQUI */
   return (
 
@@ -37,7 +37,10 @@ export default function Habits() {
 
         <BoxHabits >
           {(add) ? (
-            <NewHabitBox add={add} setAdd={setAdd} />
+            <NewHabitBox
+              add={add}
+              setAdd={setAdd}
+            />
 
           ) : (
             null
@@ -45,7 +48,9 @@ export default function Habits() {
 
           {(numHabits) ? (
 
-            <HabitsList weekdays={weekdays} />
+            <HabitsList
+              weekdays={weekdays}
+            />
 
           ) : (
             <h1>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</h1>

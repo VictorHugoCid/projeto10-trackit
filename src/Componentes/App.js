@@ -15,10 +15,15 @@ import HistoricPage from './HistoricPage/HistoricPage'
 
 export default function App() {
     /* const [token, setToken] = useState(''); */
-                /* LEMBRAR DE MUDAR ESSA DIXGRAÇA */
+    /* LEMBRAR DE MUDAR ESSA DIXGRAÇA */
 
-    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDY3NSwiaWF0IjoxNjU5NzAzMzc2fQ.7wB-T8COllJKPTPRwMebBjg6pmzpwcucUHCZVTSBvsc'
-                /* LEMBRAR DE MUDAR ESSA DIXGRAÇA */
+    const [percentage, setPercentage] = useState(0)
+
+    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDY3NSwiaWF0IjoxNjU5NzM4NTk3fQ.y3K7shd9OTwQmN7AxNdr77wPqsYQt522ttGl6_ZGbkE'
+
+    /* LEMBRAR DE MUDAR ESSA DIXGRAÇA */
+
+    const [checkArray, setcheckArray] = useState([])
 
 
     const [arrayDays, setArrayDays] = useState([])
@@ -26,7 +31,7 @@ export default function App() {
     return (
         <>
             <GlobalStyle />
-            <GlobalContext.Provider value= {{token/* , setToken */, arrayDays, setArrayDays}}>
+            <GlobalContext.Provider value={{ token/* , setToken */, arrayDays, setArrayDays, checkArray, setcheckArray, percentage, setPercentage }}>
                 <BrowserRouter>
                     <Routes>
                         <Route path="/" element={<LogIn />} />

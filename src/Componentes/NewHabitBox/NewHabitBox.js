@@ -24,13 +24,14 @@ export default function NewHabitBox({add, setAdd}) {
     console.log('token:',token)
     console.log('body:',body)
 
-/*     const promise = createHabit(body,getConfig(token))
+    const promise = createHabit(body,getConfig(token))
 
     promise.then(res=>(
       console.log("resp api",res.data)
-    )) */
+    ))
 
     setAdd(!add)
+
   }
   function cancel(){
     setArrayDays([])

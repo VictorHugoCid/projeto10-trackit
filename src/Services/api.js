@@ -18,12 +18,12 @@ function createHabit(body, getConfig) {
     return axios.post(`${URL}/habits`, body, getConfig)
 }
 
-function checkHabit(body) {
-    return axios.post(`${URL}/habits/ID_DO_HABITO/check`, body)
+function checkHabit(id, getConfig) {
+    return axios.post(`${URL}/habits/${id}/check`,{}, getConfig)
 }
 
-function unCheckHabit(body) {
-    return axios.post(`${URL}/habits/ID_DO_HABITO/uncheck`, body)
+function unCheckHabit(id, getConfig) {
+    return axios.post(`${URL}/habits/${id}/uncheck`,{}, getConfig)
 }
 
 //Gets

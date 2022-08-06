@@ -12,8 +12,12 @@ import TodayHabit from './TodayHabit'
 
 export default function Today() {
 
-    const [todayHabits, setTodayHabits] = useState([])
+    const {percentage} = useContext(GlobalContext)
+    const {checkArray} = useContext(GlobalContext)
     const { token } = useContext(GlobalContext)
+
+    const [todayHabits, setTodayHabits] = useState([])
+    const [auxPercent, setAuxPercent] = useState()
 
     useEffect(() => {
         const promise = getTodayHabits(getConfig(token))
@@ -21,21 +25,19 @@ export default function Today() {
         promise.then((res) => {
             console.log(res.data)
             setTodayHabits(res.data)
+            setAuxPercent(res.data.length)
         })
     }, [])
-
-
-
-    const habitosFeitos = 0
+    
+    const habitosFeitos = 1
 
     return (
         <TodayMain>
             <NavBar />
-
             <TodayTitle>
                 <h1>Segunda-Feira 17/05</h1>
                 <>
-                    {(habitosFeitos) ? (null) : (<h2>Nenhum hábito concluído ainda</h2>)}
+                    {(percentage) ? (<h3>{`${percentage}% dos hábitos concluídos`}</h3>) : (<h2>Nenhum hábito concluído ainda</h2>)}
                 </>
             </TodayTitle>
             {todayHabits.map((value) => (
@@ -45,12 +47,11 @@ export default function Today() {
                     isDone={value.done}
                     currentSequence = {value.currentSequence}
                     highestSequence = {value.highestSequence}
-
+                    habitId={value.id}
+                    auxPercent={auxPercent}
                 />
             ))}
             
-
-
             <Footer />
         </TodayMain>
 
@@ -85,6 +86,12 @@ const TodayTitle = styled.div`
   h2{
     font: 18px;
     color: #BABABA;
+  }
+
+  h3{
+    font: 18px;
+    color: #8FC549;
+
   }
 `
 

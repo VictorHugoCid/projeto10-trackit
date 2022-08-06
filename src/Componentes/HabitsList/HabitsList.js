@@ -20,8 +20,6 @@ const [habitsList, setHabitsList] = useState([])
 
   },[])
 
-
-
   return (
     <HabitListStyle>
       {habitsList.map((value) => 
