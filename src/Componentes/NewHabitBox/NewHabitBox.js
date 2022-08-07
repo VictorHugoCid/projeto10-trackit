@@ -1,6 +1,5 @@
 import { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
-import DaysList from "../DaysList/DaysList";
 import GlobalContext from "../../Context/GlobalContext";
 import { createHabit } from "../../Services/api";
 import getConfig from "../../Services/getConfig";
@@ -9,7 +8,6 @@ import { ThreeDots } from 'react-loader-spinner';
 export default function NewHabitBox({ add, setAdd }) {
   const weekdays = ['D', 'S', 'T', 'Q', 'Q', 'S', 'S']
 
-  const [selectedDays, setSelectedDays] = useState([])
   const {
     token,
     arrayDays,
@@ -19,7 +17,6 @@ export default function NewHabitBox({ add, setAdd }) {
     reload,
     setReload } = useContext(GlobalContext)
 
-
   const [name, setName] = useState('')
 
   const body = {
@@ -27,60 +24,81 @@ export default function NewHabitBox({ add, setAdd }) {
     days: arrayDays,
   }
 
-  function addHabit() {
-    setDisable(true)
-    console.log('Habito criado')
+  function addHabit(e) {
+    e.preventDefault()
+    setDisable(!disable)
 
-      const promise = createHabit(body, getConfig(token))
+    const promise = createHabit(body, getConfig(token))
 
-      promise.then(res => {
-        console.log("resp api", res.data)
-        setReload(!reload)
-      })
+    promise.then(res => {
+      setReload(!reload)
+    })
 
-    /* setDisable(false) */
-    setAdd(!add)
+    setDisable(false)
+    setName('')
     
+    setArrayDays([])
+    setTimeout(() => {
+      setAdd(!add)
+    }, 2000);
   }
 
   function cancel() {
-    setArrayDays([])
-    setName('')
     setAdd(!add)
-    /*  falta mudar o placeholder */
-    /* e tirar as marcações */
+  }
+
+  function selectDay(index){
+
+    if(!arrayDays.includes(index)){
+      setArrayDays([...arrayDays, index])
+    }else{
+      setArrayDays( arrayDays.filter((value) => value !== index))
+    }
   }
 
 
   return (
-    <AddHabits add ={add}>
-      <input
-        type='text'
-        placeholder='nome do hábito'
-        onChange={(e) => setName(e.target.value)}
-      ></input>
+    <AddHabits add={add}>
+      <form onSubmit={addHabit}>
+        <input
+          type='text'
+          placeholder='nome do hábito'
+          onChange={(e) => setName(e.target.value)}
+          value={name}
+        ></input>
 
-      <DaysList
-        selectedDays={selectedDays}
-        setSelectedDays={setSelectedDays}
-      />
+        <DaysListStyle >
+          {weekdays.map((weekday,index) =>
+            <DayStyle
+              key={index}
+              onClick={() => {selectDay(index)}}
+              clicked={arrayDays.includes(index)}
+            >
+              {weekday}
+            </DayStyle>
 
-      <ButtonBoxAdd >
-        <Cancel onClick={cancel}>Cancelar</Cancel>
-        <Save onClick={addHabit}>
-          {(disable) ? (
-            <ThreeDots
-              color='#FFFFFF'
-              width={50}
-              timeout={2000}
-            />
-          ) : (
-            <>Salvar</>
+
           )}
-        </Save>
-      </ButtonBoxAdd>
+        </DaysListStyle>
+
+        <ButtonBoxAdd >
+          <Cancel onClick={cancel}>Cancelar</Cancel>
+          <Save >
+            {(disable) ? (
+              <ThreeDots
+                color='#FFFFFF'
+                width={50}
+                timeout={2000}
+              />
+            ) : (
+              <>Salvar</>
+            )}
+          </Save>
+        </ButtonBoxAdd>
+      </form>
     </AddHabits>
   )
+
 }
 
 const AddHabits = styled.div`
@@ -108,8 +126,6 @@ const AddHabits = styled.div`
 
 }
 `
-
-
 const ButtonBoxAdd = styled.div`
   width: 100%;
   display: flex;
@@ -130,7 +146,7 @@ const Cancel = styled.div`
   cursor: pointer;
 `
 
-const Save = styled.div`
+const Save = styled.button`
   width: 85px;
   height: 35px;
   font-size: 16px;
@@ -144,4 +160,27 @@ const Save = styled.div`
 
   cursor: pointer;
 
+`
+const DaysListStyle = styled.div`
+  margin-top: 10px;
+  display: flex;
+`
+const DayStyle = styled.div`
+  width: 30px;
+  height: 30px;
+  border: 1px solid #d5d5d5;
+  border-radius: 5px;
+  margin-right: 8px;
+  margin-bottom: 40px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 20px;
+
+  background-color: ${(props) => (props.clicked ? "#CFCFCF" : "#fff")};
+  color: ${(props) => (props.clicked ? "#FFF" : "#CFCFCF")};
+
+  cursor: pointer;
 `

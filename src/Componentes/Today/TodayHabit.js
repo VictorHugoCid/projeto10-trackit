@@ -1,4 +1,4 @@
-import { useContext, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import styled from "styled-components"
 import GlobalContext from "../../Context/GlobalContext"
 
@@ -6,14 +6,13 @@ import { checkHabit } from "../../Services/api"
 import { unCheckHabit } from "../../Services/api"
 import getConfig from "../../Services/getConfig"
 
-export default function TodayHabit({ title, isDone, currentSequence, highestSequence, habitId, auxPercent}) {
+export default function TodayHabit({ title, currentSequence, highestSequence, habitId, auxPercent }) {
 
     const {
         token,
         setPercentage,
         checkArray,
         setcheckArray,
-        reload,
         setReload } = useContext(GlobalContext)
 
     const [check, setCheck] = useState(false)
@@ -21,18 +20,32 @@ export default function TodayHabit({ title, isDone, currentSequence, highestSequ
     const uncheckColor = { color: '#FFFFFF', background: '#d5d5d5' }
     const checkColor = { color: '#FFFFFF', background: '#8FC549' }
 
+    const [record, setRecord] = useState(false)
     const [colors, setColors] = useState({ ...uncheckColor })
+
 
     function postCheck() {
         /* console.log('postCheck',habitId) */
         const promise = checkHabit(habitId, getConfig(token))
+
+        promise.then(() => {
+            setReload(true)
+        })
     }
 
     function postUnCheck() {
         /* console.log('postUn-Check',habitId) */
         const promise = unCheckHabit(habitId, getConfig(token))
+
+        promise.then(() => {
+            setReload(true)
+        })
     }
 
+    function verifyRecord(){
+
+    }
+    
     function checked() {
 
         if (check === false) {
@@ -53,24 +66,34 @@ export default function TodayHabit({ title, isDone, currentSequence, highestSequ
                 }
             }
         }
-        setReload(!reload)
+
+
+        setReload(false)
         setCheck(!check)
     }
 
-    setPercentage(Math.round(checkArray.length / auxPercent * 100))
-
+    useEffect(() =>{
+        if(currentSequence > 0 &&  currentSequence >= highestSequence){
+            setRecord(true)
+        }else{
+            setRecord(false)
+        }
+    },[checked])
+    
+    
     return (
         <Habit>
-            <HabitText>
+            <HabitText
+                record={record}>
                 <h1>{title}</h1>
                 <h2>Sequência atual: {currentSequence}</h2>
-                <h2>Seu recorde: {highestSequence}</h2>
+                <h3>Seu recorde: {highestSequence}</h3>
             </HabitText>
 
             <HabitCheck
                 color={colors.color}
                 background={colors.background}
-                onClick={checked}>
+                onClick={() => checked()}>
                 <ion-icon name="checkmark-outline"></ion-icon>
             </HabitCheck>
         </Habit>
@@ -104,7 +127,12 @@ h1{
 
 h2{
     font-size: 13px;
-    color: #666666;
+    /* color: #666666; */
+    color: ${props => props.record ? '#8FC549' : '#666666'};
+}
+h3{
+    font-size: 13px;
+    color: #666666; 
 }
 `
 const HabitCheck = styled.div`

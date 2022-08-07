@@ -1,30 +1,22 @@
+import { useContext } from 'react'
 import styled from 'styled-components'
+import GlobalContext from '../../Context/GlobalContext'
 import Day from './Day'
 
-export default function DaysList({ selectedDays, setSelectedDays, id, name, days }) {
+export default function DaysList({ selectedDays }) {
     const weekdays = ['D', 'S', 'T', 'Q', 'Q', 'S', 'S']
 
-    function colorDay(index) {
-        if (days.includes(index)) {
-        }
-    }
 
-    /* function selected */
     return (
-
         <DaysListStyle >
             {weekdays.map((weekday, index) =>
-                
                 <Day
-                    key={index}
-                    index={index}
-                    weekday={weekday}
-                    selectedDays={selectedDays}
-                    setSelectedDays={setSelectedDays}
-                    id={id}
-                    name={name}
-                    days={days}
-                />)}
+                key={index}
+                index={index}
+                weekday={weekday}
+                selectedDays={selectedDays}
+            />
+            )}
         </DaysListStyle>
 
     )
@@ -34,4 +26,5 @@ const DaysListStyle = styled.div`
   margin-top: 10px;
   display: flex;
 `
+
 

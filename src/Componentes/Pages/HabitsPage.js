@@ -1,26 +1,17 @@
 
 import NavBar from '../commons/navbar/NavBar'
 import Footer from "../commons/footer/Footer";
-import HabitsList from "../HabitsList/HabitsList"
+import HabitsList from "../habitsList/HabitsList"
 import NewHabitBox from "../NewHabitBox/NewHabitBox"
-import GlobalContext from "../../Context/GlobalContext"
-import getConfig from "../../Services/getConfig"
 
-import { useContext, useState } from "react"
+import { useState } from "react"
 import styled from 'styled-components'
-import { createHabit } from "../../Services/api"
-import axios from "axios"
-
-
-/*     TEM Q IMPORTAR ISSO AQUI
-@import url("https://fonts.googleapis.com/css2?family=Lexend:wght@100&display=swap"); */
-
 
 export default function Habits() {
   const weekdays = ['D', 'S', 'T', 'Q', 'Q', 'S', 'S']
 
-  const [add, setAdd] = useState(false) /* abrir e fechar a box de adição */
-  const [habitsListGet, setHabitsListGet] = useState([])
+  const [add, setAdd] = useState(false)
+  
   return (
 
     <>
@@ -40,12 +31,10 @@ export default function Habits() {
               setAdd={setAdd}
             />
             
-          {(habitsListGet) ? (
+          {(true) ? (
 
             <HabitsList
               weekdays={weekdays}
-              habitsListGet={habitsListGet}
-              setHabitsListGet={setHabitsListGet}
             />
 
           ) : (
@@ -62,13 +51,14 @@ export default function Habits() {
 }
 
 
-
 const HabitsMain = styled.div`
 
   height: 100vh;
   margin-top: 70px;
   background-color: #f2f2f2;
   padding: 0 20px;
+
+  overflow-y: scroll;
 
 `
 

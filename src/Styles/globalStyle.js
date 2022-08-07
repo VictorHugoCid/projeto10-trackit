@@ -56,10 +56,20 @@ a {
 button{
 	all:unset;
 }
+input{
+	color: #666666;
+}
+
+input::placeholder{
+	color: #DBDBDB
+}
+
+body, input, button{
+	font-family: 'Lexend Deca', sans-serif;
+}
   
 * {
     box-sizing: border-box;
-	
 } 
 
 `

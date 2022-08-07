@@ -1,5 +1,4 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import '../Styles/reset.css'
 import GlobalStyle from '../Styles/globalStyle';
 import { useState } from 'react';
 import GlobalContext from '../Context/GlobalContext';
@@ -19,6 +18,7 @@ export default function App() {
     const [disable, setDisable] = useState(false)
     const [reload, setReload] = useState(false)
     const [image, setImage] = useState('')
+    const [selectedDays, setSelectedDays] = useState([])
 
     const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDY3NSwiaWF0IjoxNjU5NzM4NTk3fQ.y3K7shd9OTwQmN7AxNdr77wPqsYQt522ttGl6_ZGbkE'
 
@@ -44,7 +44,9 @@ export default function App() {
                 reload, 
                 setReload,
                 image,
-                setImage }}>
+                setImage,
+                selectedDays,
+                setSelectedDays }}>
                 <BrowserRouter>
                     <Routes>
                         <Route path="/" element={<LogIn />} />

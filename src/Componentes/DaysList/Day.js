@@ -1,66 +1,14 @@
-import { useContext, useState } from "react"
 import styled from "styled-components"
 
-import GlobalContext from "../../Context/GlobalContext"
+export default function Day({ weekday, selectedDays, index }) {
 
-
-export default function Day({ weekday, id, name, days,index }) {
-
-    const [colors, setColors] = useState({})
-    const [selectedDay, setSelectedDay] = useState(false)
-  
-    const busy = { color: '#FFFFFF', background: '#d5d5d5' }
-    const free = { color: '#d5d5d5', background: '#FFFFFF' }
-
-    const {arrayDays, setArrayDays} = useContext(GlobalContext)
-  
-/*     function colorGetHabits(){
-      console.log(days,index, days.includes(index))
-      if(days.includes(index)){
-        
-        setColors({...busy})
-      }
-
-    } */
-      
-    function selectDay() {
-      setSelectedDay(!selectedDay)
-
-      console.log(index)
-      console.log('antes:',arrayDays)
-
-      if(!arrayDays.includes(index)){
-        setArrayDays([...arrayDays, index])
-      }else{
-        const arrAuxId = [...arrayDays]
-
-        for (let i = 0; i < arrayDays.length; i++) {
-          if(arrayDays[i] === index){
-            arrAuxId.splice(i,1)
-
-
-            setArrayDays(arrAuxId)
-          }
-        }
-      }
-
-      if (selectedDay === false) {
-        setColors({ ...busy })
-      } else {
-        setColors({ ...free })
-      }
-    } 
-    return (
-
-        <DayStyle
-            onClick={selectDay}
-            color={colors.color}
-            background={colors.background}>
-            {weekday}
-            
-        </DayStyle>
-
-    )
+  return (
+    <DayStyle
+      clicked={selectedDays.includes(index)}
+    >
+      {weekday}
+    </DayStyle>
+  )
 }
 
 const DayStyle = styled.li`
@@ -77,10 +25,7 @@ const DayStyle = styled.li`
 
   font-size: 20px;
 
-  color: #d5d5d5;
-  color:${(props) => props.color} ;
-  background: ${(props) => props.background};
+  background-color: ${(props) => (props.clicked ? "#CFCFCF" : "#fff")};
+  color: ${(props) => (props.clicked ? "#FFF" : "#CFCFCF")};
 
- 
-  cursor: pointer;
 `

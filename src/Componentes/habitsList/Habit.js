@@ -7,7 +7,7 @@ import GlobalContext from "../../Context/GlobalContext";
 import getConfig from "../../Services/getConfig";
 
 
-export default function Habit({ selectedDays, setSelectedDays, id, name, days }) {
+export default function Habit({ id, name, selectedDays }) {
 
   const { token,
     reload,
@@ -25,7 +25,6 @@ export default function Habit({ selectedDays, setSelectedDays, id, name, days })
       })
     }
   }
-
   return (
     <HabitStyle>
       <DivAlt>
@@ -37,10 +36,6 @@ export default function Habit({ selectedDays, setSelectedDays, id, name, days })
       </DivAlt>
       <DaysList
         selectedDays={selectedDays}
-        setSelectedDays={setSelectedDays}
-        id={id}
-        name={name}
-        days={days}
       />
     </HabitStyle>
   )

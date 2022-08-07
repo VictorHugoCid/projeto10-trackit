@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { getTodayHabits } from "../../Services/api";
 import getConfig from "../../Services/getConfig";
 import GlobalContext from "../../Context/GlobalContext";
+
 import dayjs from "dayjs";
 import updateLocale from "dayjs/plugin/updateLocale";
 import "dayjs/locale/pt-br";
@@ -23,10 +24,10 @@ export default function Today() {
 
     const {
         token,
-        checkArray,
         percentage,
+        setPercentage,
         reload,
-        setReload } = useContext(GlobalContext)
+        checkArray} = useContext(GlobalContext)
 
 
     const [todayHabits, setTodayHabits] = useState([])
@@ -41,6 +42,8 @@ export default function Today() {
         })
     }, [reload])
 
+    setPercentage(Math.round(checkArray.length / auxPercent * 100))
+
     return (
         <TodayMain>
             <NavBar />
@@ -54,7 +57,6 @@ export default function Today() {
                 <TodayHabit
                     key={value.id}
                     title={value.name}
-                    isDone={value.done}
                     currentSequence={value.currentSequence}
                     highestSequence={value.highestSequence}
                     habitId={value.id}
@@ -90,6 +92,7 @@ const TodayTitle = styled.div`
   h1 {
   font-size: 23px;
   color: #126BA5;
+  
   margin-bottom: 5px;
   }
 
