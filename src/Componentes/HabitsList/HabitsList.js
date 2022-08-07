@@ -5,33 +5,34 @@ import getConfig from "../../Services/getConfig"
 import GlobalContext from "../../Context/GlobalContext"
 import { useContext, useEffect, useState } from "react"
 
-export default function HabitsList() {
+export default function HabitsList({habitsListGet, setHabitsListGet}) {
 
-const [habitsList, setHabitsList] = useState([])
-  const {token, reload, setReload} = useContext(GlobalContext)  
+  const { 
+    token,
+    reload,
+    setReload } = useContext(GlobalContext)
 
   useEffect(() => {
-    console.log('Criando lista de hábitos:')
     const promise = getHabits(getConfig(token))
 
     promise.then(res => {
-      console.log('a promise rolou')
-      setHabitsList(res.data)}
+      setHabitsListGet(res.data)
+    }
     )
-  },[reload])
+  }, [reload])
 
 
   return (
     <HabitListStyle>
-      {habitsList.map((value) => 
-        
-        (<Habit
-          key={value.id}
-          id={value.id}
-          name={value.name}
-          days={value.days}
-          setReload={setReload}
-        />)
+      {habitsListGet.map((value) =>
+
+      (<Habit
+        key={value.id}
+        id={value.id}
+        name={value.name}
+        days={value.days}
+        setReload={setReload}
+      />)
 
       )}
     </HabitListStyle>

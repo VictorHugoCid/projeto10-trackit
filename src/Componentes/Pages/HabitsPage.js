@@ -18,10 +18,9 @@ import axios from "axios"
 
 export default function Habits() {
   const weekdays = ['D', 'S', 'T', 'Q', 'Q', 'S', 'S']
-  const [add, setAdd] = useState(false) /* abrir e fechar a box de adição */
 
-  const [reload, setReload] = useState(false)
-  const numHabits = 1 /* LEMBRAR DE TIRAR ISSO AQUI */
+  const [add, setAdd] = useState(false) /* abrir e fechar a box de adição */
+  const [habitsListGet, setHabitsListGet] = useState([])
   return (
 
     <>
@@ -36,20 +35,17 @@ export default function Habits() {
         </HabitsTitle>
 
         <BoxHabits >
-          {(add) ? (
             <NewHabitBox
               add={add}
               setAdd={setAdd}
             />
-
-          ) : (
-            null
-          )}
-
-          {(numHabits) ? (
+            
+          {(habitsListGet) ? (
 
             <HabitsList
               weekdays={weekdays}
+              habitsListGet={habitsListGet}
+              setHabitsListGet={setHabitsListGet}
             />
 
           ) : (

@@ -53,7 +53,7 @@ export default function NewHabitBox({ add, setAdd }) {
 
 
   return (
-    <AddHabits >
+    <AddHabits add ={add}>
       <input
         type='text'
         placeholder='nome do hábito'
@@ -84,6 +84,8 @@ export default function NewHabitBox({ add, setAdd }) {
 }
 
 const AddHabits = styled.div`
+  display: ${props => props.add ? 'inherit' : 'none'};
+  display: inh;
   width: 100%;
   height: 180px;
   margin-bottom: 15px;
@@ -104,7 +106,6 @@ const AddHabits = styled.div`
 
   outline: none;
 
-  transition: all linear 3000ms;/* acho q entra uma props aqui ou no display, na real */
 }
 `
 

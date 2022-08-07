@@ -59,6 +59,7 @@ button{
   
 * {
     box-sizing: border-box;
+	
 } 
 
 `
