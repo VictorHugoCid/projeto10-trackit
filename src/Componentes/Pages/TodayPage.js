@@ -39,6 +39,7 @@ export default function Today() {
         promise.then((res) => {
             setTodayHabits(res.data)
             setAuxPercent(res.data.length)
+            console.log(res.data)
         })
     }, [reload])
 
@@ -60,10 +61,9 @@ export default function Today() {
                     currentSequence={value.currentSequence}
                     highestSequence={value.highestSequence}
                     habitId={value.id}
-                    auxPercent={auxPercent}
+                    isDone={value.done}
                 />
             ))}
-
             <Footer />
         </TodayMain>
 

@@ -6,11 +6,10 @@ import { checkHabit } from "../../Services/api"
 import { unCheckHabit } from "../../Services/api"
 import getConfig from "../../Services/getConfig"
 
-export default function TodayHabit({ title, currentSequence, highestSequence, habitId, auxPercent }) {
+export default function TodayHabit({ title, currentSequence, highestSequence, habitId, isDone }) {
 
     const {
         token,
-        setPercentage,
         checkArray,
         setcheckArray,
         setReload } = useContext(GlobalContext)
@@ -23,9 +22,7 @@ export default function TodayHabit({ title, currentSequence, highestSequence, ha
     const [record, setRecord] = useState(false)
     const [colors, setColors] = useState({ ...uncheckColor })
 
-
     function postCheck() {
-        /* console.log('postCheck',habitId) */
         const promise = checkHabit(habitId, getConfig(token))
 
         promise.then(() => {
@@ -34,18 +31,14 @@ export default function TodayHabit({ title, currentSequence, highestSequence, ha
     }
 
     function postUnCheck() {
-        /* console.log('postUn-Check',habitId) */
         const promise = unCheckHabit(habitId, getConfig(token))
 
         promise.then(() => {
             setReload(true)
+            
         })
     }
 
-    function verifyRecord(){
-
-    }
-    
     function checked() {
 
         if (check === false) {
@@ -72,15 +65,14 @@ export default function TodayHabit({ title, currentSequence, highestSequence, ha
         setCheck(!check)
     }
 
-    useEffect(() =>{
-        if(currentSequence > 0 &&  currentSequence >= highestSequence){
+    useEffect(() => {
+        if (currentSequence > 0 && currentSequence >= highestSequence) {
             setRecord(true)
-        }else{
+        } else {
             setRecord(false)
         }
-    },[checked])
-    
-    
+    }, [checked])
+
     return (
         <Habit>
             <HabitText
@@ -91,8 +83,7 @@ export default function TodayHabit({ title, currentSequence, highestSequence, ha
             </HabitText>
 
             <HabitCheck
-                color={colors.color}
-                background={colors.background}
+                isDone={isDone}
                 onClick={() => checked()}>
                 <ion-icon name="checkmark-outline"></ion-icon>
             </HabitCheck>
@@ -144,6 +135,8 @@ justify-content: center;
 align-items: center;
 
 background: ${props => props.background};
+background-color: ${(props) => (props.isDone ? "#8FC549" : "#d5d5d5")};
+
 border: 1px solid #E7E7E7;
 border-radius: 5px;
 
@@ -152,6 +145,6 @@ cursor: pointer;
 ion-icon{
     width: 60px;
     height: 55px;
-    color: ${props => props.color};
+    color: #FFF;
 }
 `
