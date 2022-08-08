@@ -23,10 +23,14 @@ export default function NewHabitBox({ add, setAdd }) {
     name: name,
     days: arrayDays,
   }
+  
+  function openBox(){
+    
+  }
 
   function addHabit(e) {
     e.preventDefault()
-    setDisable(!disable)
+    setDisable(false)
 
     const promise = createHabit(body, getConfig(token))
 
@@ -34,7 +38,6 @@ export default function NewHabitBox({ add, setAdd }) {
       setReload(!reload)
     })
 
-    setDisable(false)
     setName('')
     
     setArrayDays([])

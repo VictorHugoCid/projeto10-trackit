@@ -11,28 +11,24 @@ import HistoricPage from './Pages/HistoricPage'
 
 
 export default function App() {
-    /* const [token, setToken] = useState(''); */
+    const [token, setToken] = useState('');
     /* LEMBRAR DE MUDAR ESSA DIXGRAÇA */
+    /* const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDY3NSwiaWF0IjoxNjU5NzM4NTk3fQ.y3K7shd9OTwQmN7AxNdr77wPqsYQt522ttGl6_ZGbkE' */
+
 
     const [percentage, setPercentage] = useState(0)
     const [disable, setDisable] = useState(false)
     const [reload, setReload] = useState(false)
     const [image, setImage] = useState('')
     const [selectedDays, setSelectedDays] = useState([])
-
-    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDY3NSwiaWF0IjoxNjU5NzM4NTk3fQ.y3K7shd9OTwQmN7AxNdr77wPqsYQt522ttGl6_ZGbkE'
-
-    /* LEMBRAR DE MUDAR ESSA DIXGRAÇA */
-
     const [checkArray, setcheckArray] = useState([])
-
     const [arrayDays, setArrayDays] = useState([])
 
     return (
         <>
             <GlobalStyle />
             <GlobalContext.Provider value={
-                { token/* , setToken */, 
+                { token, setToken, 
                 arrayDays, 
                 setArrayDays, 
                 checkArray, 

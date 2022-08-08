@@ -1,6 +1,4 @@
-import { useContext } from 'react'
 import styled from 'styled-components'
-import GlobalContext from '../../Context/GlobalContext'
 import Day from './Day'
 
 export default function DaysList({ selectedDays }) {

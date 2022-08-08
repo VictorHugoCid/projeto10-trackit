@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { Link, useNavigate } from 'react-router-dom'
-import axios from 'axios';
 import logo from './logo.png'
 import { useContext, useState } from 'react';
 import { logIn } from '../../Services/api'
@@ -37,10 +36,10 @@ export default function LogIn() {
             })
             .then(res => {
                 setImage(res.data.image)
-                /* setToken(res.data.token) */
+                setToken(res.data.token)
                 /* LEMBRAR DE MUDAR ESSA DIXGRAÇA */
                 navigate('/hoje')
-                setTimeout(() =>setDisable(false), 2000)
+                setTimeout(() =>setDisable(!disable), 2000)
             })
 
 
@@ -68,6 +67,7 @@ export default function LogIn() {
                     <ThreeDots
                         color='#FFFFFF'
                         width={80}
+                        height={20}
                         timeout={2000}
                     />
                 ) : (
