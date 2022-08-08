@@ -1,8 +1,8 @@
 
 import NavBar from '../commons/navbar/NavBar'
 import Footer from "../commons/footer/Footer";
-import HabitsList from "../habitsList/HabitsList"
-import NewHabitBox from "../NewHabitBox/NewHabitBox"
+import HabitsList from "../Habits/HabitsList"
+import NewHabitBox from "../Habits/NewHabitBox"
 
 import { useState } from "react"
 import styled from 'styled-components'

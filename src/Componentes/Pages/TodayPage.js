@@ -26,12 +26,12 @@ export default function Today() {
         token,
         percentage,
         setPercentage,
-        reload,
-        checkArray} = useContext(GlobalContext)
+        reload} = useContext(GlobalContext)
 
 
     const [todayHabits, setTodayHabits] = useState([])
     const [auxPercent, setAuxPercent] = useState()
+    const [arrayDone, setArrayDone] = useState([])
 
     useEffect(() => {
         const promise = getTodayHabits(getConfig(token))
@@ -39,33 +39,43 @@ export default function Today() {
         promise.then((res) => {
             setTodayHabits(res.data)
             setAuxPercent(res.data.length)
-            console.log(res.data)
+            setArrayDone(res.data.filter((value)=>(value.done === true)))
         })
     }, [reload])
 
-    setPercentage(Math.round(checkArray.length / auxPercent * 100))
+
+    setPercentage(Math.round(arrayDone.length / todayHabits.length * 100))
 
     return (
-        <TodayMain>
-            <NavBar />
-            <TodayTitle>
-                <h1>{dayjs().format('dddd, DD/MM')}</h1>
-                <>
-                    {(percentage) ? (<h3>{`${percentage}% dos hábitos concluídos`}</h3>) : (<h2>Nenhum hábito concluído ainda</h2>)}
-                </>
-            </TodayTitle>
-            {todayHabits.map((value) => (
-                <TodayHabit
-                    key={value.id}
-                    title={value.name}
-                    currentSequence={value.currentSequence}
-                    highestSequence={value.highestSequence}
-                    habitId={value.id}
-                    isDone={value.done}
-                />
-            ))}
-            <Footer />
-        </TodayMain>
+        <>
+
+            {(todayHabits.length === 0) ? (null
+
+            ) : (
+                <TodayMain>
+                    <NavBar />
+                    <TodayTitle>
+                        <h1>{dayjs().format('dddd, DD/MM')}</h1>
+                        <>
+                            {(percentage) ? (<h3>{`${percentage}% dos hábitos concluídos`}</h3>) : (<h2>Nenhum hábito concluído ainda</h2>)}
+                        </>
+                    </TodayTitle>
+                    {todayHabits.map((value) => (
+                        <TodayHabit
+                            key={value.id}
+                            title={value.name}
+                            currentSequence={value.currentSequence}
+                            highestSequence={value.highestSequence}
+                            habitId={value.id}
+                            isDone={value.done}
+                        />
+                    ))}
+                    <Footer />
+                </TodayMain>
+
+            )}
+        </>
+
 
     )
 }

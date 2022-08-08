@@ -13,7 +13,6 @@ export default function LogIn() {
     const [password, setPassword] = useState('');
 
     const {
-        token,
         setToken,
         disable,
         setDisable,
@@ -36,9 +35,7 @@ export default function LogIn() {
             })
             .then(res => {
                 setImage(res.data.image)
-                /* setToken(res.data.token) */
-                console.log(res.data.token)
-                /* LEMBRAR DE MUDAR ESSA DIXGRAÇA */
+                setToken(res.data.token)
 
                 setTimeout(() => {
                     navigate('/hoje')

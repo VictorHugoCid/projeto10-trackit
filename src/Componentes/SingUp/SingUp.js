@@ -21,7 +21,6 @@ export default function SingUp() {
     });
 
     function handleForm(event) {
-        console.log(event.target.name, event.target.value);
         setForm({
             ...form,
             [event.target.name]: event.target.value,

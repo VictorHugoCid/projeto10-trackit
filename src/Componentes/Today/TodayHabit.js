@@ -12,15 +12,9 @@ export default function TodayHabit({ title, currentSequence, highestSequence, ha
         token,
         checkArray,
         setcheckArray,
-        setReload } = useContext(GlobalContext)
-
-    const [check, setCheck] = useState(false)
-
-    const uncheckColor = { color: '#FFFFFF', background: '#d5d5d5' }
-    const checkColor = { color: '#FFFFFF', background: '#8FC549' }
+        setReload} = useContext(GlobalContext)
 
     const [record, setRecord] = useState(false)
-    const [colors, setColors] = useState({ ...uncheckColor })
 
     function postCheck() {
         const promise = checkHabit(habitId, getConfig(token))
@@ -35,34 +29,16 @@ export default function TodayHabit({ title, currentSequence, highestSequence, ha
 
         promise.then(() => {
             setReload(true)
-            
         })
     }
 
     function checked() {
-
-        if (check === false) {
-            setColors({ ...checkColor })
+        if (isDone === false) {
             postCheck()
-            setcheckArray([...checkArray, habitId])
-
-
         } else {
-            setColors({ ...uncheckColor })
             postUnCheck()
-            const arrayAux = [...checkArray]
-            for (let i = 0; i < checkArray.length; i++) {
-                if (checkArray[i] === habitId) {
-                    arrayAux.splice(i, 1)
-
-                    setcheckArray([...arrayAux])
-                }
-            }
         }
-
-
         setReload(false)
-        setCheck(!check)
     }
 
     useEffect(() => {
@@ -71,6 +47,7 @@ export default function TodayHabit({ title, currentSequence, highestSequence, ha
         } else {
             setRecord(false)
         }
+
     }, [checked])
 
     return (
@@ -118,7 +95,6 @@ h1{
 
 h2{
     font-size: 13px;
-    /* color: #666666; */
     color: ${props => props.record ? '#8FC549' : '#666666'};
 }
 h3{
@@ -134,7 +110,6 @@ display: flex;
 justify-content: center;
 align-items: center;
 
-background: ${props => props.background};
 background-color: ${(props) => (props.isDone ? "#8FC549" : "#d5d5d5")};
 
 border: 1px solid #E7E7E7;
