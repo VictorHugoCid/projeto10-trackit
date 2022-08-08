@@ -19,8 +19,6 @@ export default function Habit({ id, name, selectedDays }) {
       const promise = deleteHabit(id, getConfig(token))
 
       promise.then((res) => {
-        console.log(res.data)
-
         setReload(!reload)
       })
     }

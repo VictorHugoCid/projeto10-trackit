@@ -23,14 +23,19 @@ export default function NewHabitBox({ add, setAdd }) {
     name: name,
     days: arrayDays,
   }
-  
-  function openBox(){
-    
-  }
+
 
   function addHabit(e) {
     e.preventDefault()
-    setDisable(false)
+
+    setTimeout(() => {
+      setAdd(!add)
+      setDisable(false)
+      setName('')
+      setArrayDays([])
+    }, 2000);
+
+    setDisable(true)
 
     const promise = createHabit(body, getConfig(token))
 
@@ -38,24 +43,22 @@ export default function NewHabitBox({ add, setAdd }) {
       setReload(!reload)
     })
 
-    setName('')
-    
-    setArrayDays([])
-    setTimeout(() => {
-      setAdd(!add)
-    }, 2000);
   }
 
   function cancel() {
     setAdd(!add)
   }
 
-  function selectDay(index){
+  function selectDay(index) {
 
-    if(!arrayDays.includes(index)){
+    if (disable === true) {
+      return
+    }
+
+    if (!arrayDays.includes(index)) {
       setArrayDays([...arrayDays, index])
-    }else{
-      setArrayDays( arrayDays.filter((value) => value !== index))
+    } else {
+      setArrayDays(arrayDays.filter((value) => value !== index))
     }
   }
 
@@ -68,13 +71,14 @@ export default function NewHabitBox({ add, setAdd }) {
           placeholder='nome do hábito'
           onChange={(e) => setName(e.target.value)}
           value={name}
+          disabled={disable}
         ></input>
 
         <DaysListStyle >
-          {weekdays.map((weekday,index) =>
+          {weekdays.map((weekday, index) =>
             <DayStyle
               key={index}
-              onClick={() => {selectDay(index)}}
+              onClick={() => { selectDay(index) }}
               clicked={arrayDays.includes(index)}
             >
               {weekday}
@@ -116,6 +120,7 @@ const AddHabits = styled.div`
   background-color: #ffffff;
 
   input {
+
   width: 100%;
   height: 40px;
   border: 1px solid #d5d5d5;

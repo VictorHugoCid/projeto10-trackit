@@ -11,9 +11,9 @@ import HistoricPage from './Pages/HistoricPage'
 
 
 export default function App() {
-    const [token, setToken] = useState('');
+    /* const [token, setToken] = useState(''); */
     /* LEMBRAR DE MUDAR ESSA DIXGRAÇA */
-    /* const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDY3NSwiaWF0IjoxNjU5NzM4NTk3fQ.y3K7shd9OTwQmN7AxNdr77wPqsYQt522ttGl6_ZGbkE' */
+     const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDY3NSwiaWF0IjoxNjU5OTU1OTI0fQ.SCq9ol1rmwDxfr-xIe6cEoOrwQo1oC-tcVjFdktkAVU'
 
 
     const [percentage, setPercentage] = useState(0)
@@ -28,7 +28,7 @@ export default function App() {
         <>
             <GlobalStyle />
             <GlobalContext.Provider value={
-                { token, setToken, 
+                { token, /* setToken, */ 
                 arrayDays, 
                 setArrayDays, 
                 checkArray, 

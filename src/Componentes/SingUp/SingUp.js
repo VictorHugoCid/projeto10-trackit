@@ -30,16 +30,7 @@ export default function SingUp() {
     }
 
     function sendForm() {
-        console.log(form);
-        setDisable(!disable)
-
-        /*         const body ={
-                    email:form.email,
-                    name:form.name,
-                    image:form.image,
-                    password:form.password,
-                } 
-                *//*  OU DE UMA FORMA MAIS ELEGANTE: */
+        setDisable(true)
 
         const body = {
             ...form,
@@ -48,14 +39,17 @@ export default function SingUp() {
         const promise = singUp(body)
 
         promise
-            .catch(()=> {
+            .catch(() => {
                 alert("Erro ao se cadastrar")
             })
             .then(res => {
-            navigate('/');
-        })
+                setTimeout(() => {
+                    navigate('/hoje')
+                    setDisable(false)
+                }, 2000)
+            })
 
-        
+
     }
 
     return (
@@ -67,6 +61,7 @@ export default function SingUp() {
                 name='email'
                 onChange={handleForm}
                 value={form.email}
+                disabled={disable}
             />
             <InputSingUp
                 type='password'
@@ -74,6 +69,7 @@ export default function SingUp() {
                 name='password'
                 onChange={handleForm}
                 value={form.password}
+                disabled={disable}
             />
             <InputSingUp
                 type='text'
@@ -81,6 +77,7 @@ export default function SingUp() {
                 name='name'
                 onChange={handleForm}
                 value={form.name}
+                disabled={disable}
             />
             <InputSingUp
                 type='source'
@@ -88,6 +85,7 @@ export default function SingUp() {
                 name='image'
                 onChange={handleForm}
                 value={form.image}
+                disabled={disable}
             />
             <SingUpButton onClick={sendForm}>
                 {(disable) ? (

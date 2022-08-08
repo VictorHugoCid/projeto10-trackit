@@ -31,56 +31,61 @@ export default function LogIn() {
         const promise = logIn(body)
 
         promise
-            .catch(()=> {
+            .catch(() => {
                 alert("Erro ao logar")
             })
             .then(res => {
                 setImage(res.data.image)
-                setToken(res.data.token)
+                /* setToken(res.data.token) */
+                console.log(res.data.token)
                 /* LEMBRAR DE MUDAR ESSA DIXGRAÇA */
-                navigate('/hoje')
-                setTimeout(() =>setDisable(!disable), 2000)
-            })
+
+                setTimeout(() => {
+                    navigate('/hoje')
+                    setDisable(false)
+            }, 2000)
+    })
 
 
-    }
+}
 
-    return (
-
-
-        <LoginBox className='loginBox'>
-            <img src={logo} alt='Track-it' />
-            <InputLogin
-                type='email'
-                placeholder='email'
-                onChange={(e) => setEmail(e.target.value)}
-                value={email}
-            />
-            <InputLogin
-                type='password'
-                placeholder='senha'
-                onChange={(e) => setPassword(e.target.value)}
-                value={password}
-            />
-            <LoginButton className='loginButton' onClick={sendForm}>
-                {(disable) ? (
-                    <ThreeDots
-                        color='#FFFFFF'
-                        width={80}
-                        height={20}
-                        timeout={2000}
-                    />
-                ) : (
-                    <>Entrar</>
-                )}
-            </LoginButton>
-            <Link to={`/cadastro`}>
-                <p>Não tem uma conta? Cadastre-se!</p>
-            </Link>
-        </LoginBox>
+return (
 
 
-    )
+    <LoginBox className='loginBox'>
+        <img src={logo} alt='Track-it' />
+        <InputLogin
+            type='email'
+            placeholder='email'
+            onChange={(e) => setEmail(e.target.value)}
+            value={email}
+            disabled={disable}
+        />
+        <InputLogin
+            type='password'
+            placeholder='senha'
+            onChange={(e) => setPassword(e.target.value)}
+            value={password}
+            disabled={disable}
+        />
+        <LoginButton className='loginButton' onClick={sendForm}>
+            {(disable) ? (
+                <ThreeDots
+                    color='#FFFFFF'
+                    width={80}
+                    height={20}
+                />
+            ) : (
+                <>Entrar</>
+            )}
+        </LoginButton>
+        <Link to={`/cadastro`}>
+            <p>Não tem uma conta? Cadastre-se!</p>
+        </Link>
+    </LoginBox>
+
+
+)
 }
 
 
